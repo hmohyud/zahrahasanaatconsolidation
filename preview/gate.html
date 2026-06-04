@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Gate bypass for local preview. Remove this script before deploying. -->
+  <script>sessionStorage.setItem('zh_gate_passed','true');location.replace('index.html');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zahra Hasanaat — Access</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { height: 100%; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #0a1628 0%, #132238 50%, #0d1b2a 100%);
+      color: #e0e0e0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: 1rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .gate-container {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    }
+
+    .gate-card.success {
+      transform: scale(0.96);
+      opacity: 0;
+    }
+
+    .gate-header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .gate-header h1 {
+      font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .gate-header p {
+      font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.875rem);
+      color: #7a8da0;
+      line-height: 1.6;
+    }
+
+    .gate-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .gate-ornament span {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C8A951, transparent);
+    }
+
+    .gate-ornament svg {
+      width: 16px;
+      height: 16px;
+      color: #C8A951;
+      flex-shrink: 0;
+    }
+
+    .field-group {
+      margin-bottom: 1rem;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #7a8da0;
+      margin-bottom: 0.4rem;
+    }
+
+    .field-group input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+      outline: none;
+      -webkit-appearance: none;
+      min-height: 48px;
+    }
+
+    .field-group input::placeholder {
+      color: #3d4f60;
+    }
+
+    .field-group input:focus {
+      border-color: rgba(200, 169, 81, 0.5);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 0 0 3px rgba(200, 169, 81, 0.1);
+    }
+
+    .field-group input.error {
+      border-color: rgba(231, 76, 60, 0.6);
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.08);
+    }
+
+    .field-group input.valid {
+      border-color: rgba(13, 124, 102, 0.5);
+      box-shadow: 0 0 0 3px rgba(13, 124, 102, 0.1);
+    }
+
+    .gate-btn {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #C8A951 0%, #b39540 100%);
+      color: #0a1628;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 0.5rem;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-appearance: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(200, 169, 81, 0.35);
+    }
+
+    .gate-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .gate-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .gate-error {
+      text-align: center;
+      color: #e74c3c;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      min-height: 1.25rem;
+      transition: opacity 0.25s;
+    }
+
+    .gate-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.65rem;
+      color: #3d4f60;
+      letter-spacing: 0.03em;
+    }
+
+    /* Success overlay */
+    .gate-success {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .gate-success.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .success-check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(13, 124, 102, 0.15);
+      border: 2px solid #0D7C66;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.5);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gate-success.visible .success-check {
+      transform: scale(1);
+    }
+
+    .success-check svg {
+      width: 32px;
+      height: 32px;
+      color: #0D7C66;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+    }
+
+    .gate-success.visible .success-check svg {
+      animation: checkDraw 0.4s 0.15s ease forwards;
+    }
+
+    @keyframes checkDraw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .shake { animation: shake 0.4s ease; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shake { animation: none; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    :focus-visible {
+      outline: 2px solid #C8A951;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="gate-container">
+    <div class="gate-card" id="gateCard">
+      <div class="gate-header">
+        <h1>Zahra Hasanaat</h1>
+        <div class="gate-ornament">
+          <span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+          <span></span>
+        </div>
+        <p>This site is password protected.<br>Enter both access codes to continue.</p>
+      </div>
+
+      <form id="gateForm" autocomplete="off">
+        <div class="field-group">
+          <label for="pass1">Access Code 1</label>
+          <input type="password" id="pass1" placeholder="Enter first access code" required>
+        </div>
+        <div class="field-group">
+          <label for="pass2">Access Code 2</label>
+          <input type="password" id="pass2" placeholder="Enter second access code" required>
+        </div>
+        <button type="submit" class="gate-btn" id="gateBtn">Enter Site</button>
+        <div class="gate-error" id="gateError" role="alert" aria-live="polite"></div>
+      </form>
+
+      <div class="gate-footer">
+        &copy; 2026 Zahra Hasanaat
+      </div>
+    </div>
+  </div>
+
+  <div class="gate-success" id="gateSuccess">
+    <div class="success-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 12 10 16 18 8"/>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    async function sha256(message) {
+      var msgBuffer = new TextEncoder().encode(message);
+      var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      var hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    }
+
+    /* Real password hashes are kept out of this public repo (archived locally).
+       The gate is disabled for the public deploy; set real SHA-256 hashes here
+       and re-enable the redirect in index.html to turn protection back on. */
+    var HASH_1 = '0000000000000000000000000000000000000000000000000000000000000000';
+    var HASH_2 = '0000000000000000000000000000000000000000000000000000000000000000';
+    var SESSION_KEY = 'zh_gate_passed';
+
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+      window.location.replace('index.html');
+    }
+
+    var form = document.getElementById('gateForm');
+    var pass1 = document.getElementById('pass1');
+    var pass2 = document.getElementById('pass2');
+    var errorEl = document.getElementById('gateError');
+    var card = document.getElementById('gateCard');
+    var btn = document.getElementById('gateBtn');
+    var successOverlay = document.getElementById('gateSuccess');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+
+      pass1.classList.remove('error', 'valid');
+      pass2.classList.remove('error', 'valid');
+      errorEl.textContent = '';
+
+      var h1 = await sha256(pass1.value);
+      var h2 = await sha256(pass2.value);
+
+      var valid1 = h1 === HASH_1;
+      var valid2 = h2 === HASH_2;
+
+      if (!valid1) pass1.classList.add('error');
+      else pass1.classList.add('valid');
+
+      if (!valid2) pass2.classList.add('error');
+      else pass2.classList.add('valid');
+
+      if (!valid1 || !valid2) {
+        errorEl.textContent = 'One or both access codes are incorrect.';
+        card.classList.remove('shake');
+        void card.offsetWidth;
+        card.classList.add('shake');
+        btn.disabled = false;
+        btn.textContent = 'Enter Site';
+        return;
+      }
+
+      sessionStorage.setItem(SESSION_KEY, 'true');
+
+      card.classList.add('success');
+      successOverlay.classList.add('visible');
+
+      setTimeout(function () {
+        window.location.replace('index.html');
+      }, 900);
+    });
+  </script>
+</body>
+</html>

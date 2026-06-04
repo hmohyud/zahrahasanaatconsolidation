@@ -1,0 +1,14 @@
+[build]
+  publish = "preview"
+
+[[redirects]]
+  from = "/"
+  to = "/gate.html"
+  status = 200
+  conditions = {Cookie = ["zh_gate_passed!=true"]}
+
+# Fallback: serve index.html for clean URLs
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

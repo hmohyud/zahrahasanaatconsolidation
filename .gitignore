@@ -1,0 +1,22 @@
+# Large original media uploads at repo root (510MB+) — restore from source XMLs.
+# NOTE: anchored to root so the site's own preview/assets/uploads/ is NOT ignored.
+/uploads/
+
+# Local-only archive: raw WordPress XML exports, the generator, and the
+# gate file with real password hashes. Kept locally, never pushed (repo is public).
+/_archive/
+/.zip-content/
+
+# Local Claude Code config (contains local permission notes / plaintext) — never publish
+/.claude/
+
+# The consolidated static site (deployed to Netlify) lives in preview/ and IS tracked.
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
