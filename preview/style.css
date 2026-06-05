@@ -2,21 +2,24 @@
 /* Mobile-first responsive design */
 
 :root {
-  --color-foreground: #1A1A2E;
-  --color-background: #FFFFFF;
-  --color-primary: #0D7C66;
-  --color-primary-dark: #096b58;
-  --color-primary-light: #E8F5F1;
+  /* Warm "museum" palette: ivory ground, ink text, restrained green/gold accents */
+  --color-foreground: #23201A;        /* warm ink */
+  --color-background: #FBF8F1;         /* ivory */
+  --color-surface: #FFFFFF;           /* cards/panels sit a touch brighter than the ground */
+  --color-primary: #0C6F5B;           /* deep museum green (>=4.5:1 as text on light bands) */
+  --color-primary-dark: #0a5f4e;
+  --color-primary-light: #E8F1EC;
   --color-secondary: #1B4D3E;
   --color-accent: #C8A951;
-  --color-accent-deep: #8a6a16; /* readable gold for text on light backgrounds (>=4.5:1 on white) */
-  --color-accent-light: #f5edda;
-  --color-muted: #6B7280;
-  --color-light-gray: #F7F8FA;
-  --color-border: #E5E7EB;
-  --color-dark: #0a1628;
-  --color-dark-lighter: #111d30;
+  --color-accent-deep: #8a6a16;       /* readable gold for text on light backgrounds (>=4.5:1) */
+  --color-accent-light: #f3ead6;
+  --color-muted: #6f6555;             /* warm muted */
+  --color-light-gray: #F3ECDE;        /* warm sand for alternating sections */
+  --color-border: #E4DBC9;            /* warm hairline */
+  --color-dark: #1c2a24;              /* deep evergreen-ink for dark sections/footer */
+  --color-dark-lighter: #24352d;
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   --content-width: 780px;
   --wide-width: 1200px;
   --header-height: 64px;
@@ -53,18 +56,27 @@ body.nav-open { overflow: hidden; }
 a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
 a:hover { color: var(--color-secondary); }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-primary);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+h1, h2, h3, h4, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0;
   color: var(--color-foreground);
 }
-h1 { font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem); }
-h2 { font-size: clamp(1.75rem, 1.25rem + 2vw, 2.75rem); }
-h3 { font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem); }
-h4 { font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); }
-h5 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+/* classical serif display sizes — a touch larger & airier than the sans set */
+h1 { font-size: clamp(2.6rem, 1.8rem + 3.6vw, 4.75rem); font-weight: 600; }
+h2 { font-size: clamp(2rem, 1.4rem + 2.4vw, 3.1rem); }
+h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); }
+h4 { font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.6rem); }
+/* eyebrow label stays a quiet, wide-tracked sans for elegant contrast with the serif */
+h5 {
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-accent-deep);
+}
 
 img { max-width: 100%; height: auto; }
 
@@ -109,11 +121,13 @@ img { max-width: 100%; height: auto; }
 }
 
 .site-title {
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--color-foreground);
   white-space: nowrap;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
 }
 .site-title a { color: inherit; }
 
@@ -414,11 +428,25 @@ nav .subsubmenu a.active { font-weight: 600; }
 .section-header .section-title::after {
   content: '';
   display: block;
-  width: 42px;
-  height: 3px;
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent) 18%, var(--color-accent) 82%, transparent);
+  margin: 1.1rem auto 0;
+  position: relative;
+}
+.section-header .section-title {
+  position: relative;
+}
+.section-header .section-title::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1.1rem;
+  width: 6px;
+  height: 6px;
   background: var(--color-accent);
-  border-radius: 2px;
-  margin: 0.9rem auto 0;
+  transform: translate(-50%, 50%) rotate(45deg);
+  z-index: 1;
 }
 .section-subtitle {
   text-align: center;
@@ -1041,9 +1069,9 @@ nav .subsubmenu a.active { font-weight: 600; }
 .page-content .wp-block-quote cite {
   display: block;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.85rem;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   margin-top: 0.5rem;
 }
 
@@ -1405,13 +1433,15 @@ nav .subsubmenu a.active { font-weight: 600; }
   margin-bottom: 1.5rem;
 }
 .welcome-lead {
-  font-size: clamp(1.15rem, 1.05rem + 0.6vw, 1.55rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.35rem);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.4;
   color: var(--color-foreground);
-  max-width: 700px;
-  margin: 0 auto 0.6rem;
-  letter-spacing: -0.01em;
+  max-width: 760px;
+  margin: 0 auto 0.9rem;
+  letter-spacing: 0;
 }
 .welcome-cite {
   color: var(--color-accent-deep);
