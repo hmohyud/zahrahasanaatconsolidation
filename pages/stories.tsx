@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Layout, { SiteSettings } from '../components/Layout';
 import PageHero from '../components/PageHero';
 import { getSite, listStoriesMeta } from '../lib/content';
+import { asset } from '../lib/url';
 
 type StoryMeta = {
   slug: string;
@@ -59,7 +60,7 @@ export default function StoriesIndex({
                 >
                   {s.heroImage ? (
                     <div className="story-img-wrapper">
-                      <img className="story-img" src={s.heroImage} alt={s.title} loading="lazy" />
+                      <img className="story-img" src={asset(s.heroImage)} alt={s.title} loading="lazy" />
                     </div>
                   ) : (
                     <div className="story-img-wrapper is-ph">

@@ -299,7 +299,9 @@ nav .subsubmenu a.active { font-weight: 600; }
   position: relative;
   overflow: hidden;
   color: white;
-  padding: 3rem 1.25rem;
+  /* bottom padding reserves the scroll-cue zone (frame inset + cue + gap)
+     so centred content can never collide with it */
+  padding: 3rem 1.25rem calc(clamp(14px, 2.2vw, 30px) + 88px);
 }
 
 .hero-bg {
@@ -953,7 +955,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   }
   nav .subsubmenu a:hover { background: var(--color-light-gray); color: var(--color-primary); }
 
-  .hero { min-height: 90vh; padding: 4rem 2rem; }
+  .hero { min-height: 90vh; padding: 4rem 2rem calc(clamp(14px, 2.2vw, 30px) + 88px); }
 
   .card-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .card { padding: 1.75rem; }
@@ -1974,3 +1976,8 @@ nav a:hover .ext-icon { opacity: 1; }
 
 /* Squared back-to-top keeps its glyph centred */
 .back-to-top { border: 1px solid rgba(255, 255, 255, 0.18); }
+
+/* On short windows there is no room for the scroll cue — drop it entirely */
+@media (max-height: 660px) {
+  .hero-scroll { display: none; }
+}

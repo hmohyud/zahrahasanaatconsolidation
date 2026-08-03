@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useTina } from 'tinacms/dist/react';
 import Layout, { SiteSettings } from '../components/Layout';
 import { getHome, getSite, listStoriesMeta, HOME_QUERY } from '../lib/content';
+import { asset } from '../lib/url';
 
 const ICONS: Record<string, JSX.Element> = {
   book: (
@@ -68,7 +69,7 @@ export default function HomePage(props: {
         {/* ---------- HERO ---------- */}
         <section
           className="hero hero--photo"
-          style={{ ['--hero-img' as any]: `url('${home.hero.image}')` }}
+          style={{ ['--hero-img' as any]: `url('${asset(home.hero.image)}')` }}
         >
           <div className="hero-bg"></div>
           <div className="hero-pattern"></div>
@@ -152,7 +153,7 @@ export default function HomePage(props: {
         {/* ---------- FEATURE ---------- */}
         <section className="feature">
           <div className="feature-media reveal">
-            <img src={home.feature.image} alt={home.feature.title} loading="lazy" />
+            <img src={asset(home.feature.image)} alt={home.feature.title} loading="lazy" />
           </div>
           <div className="feature-body reveal">
             <h5>{home.feature.eyebrow}</h5>
@@ -178,7 +179,7 @@ export default function HomePage(props: {
                 <a className="story-card reveal" href={`${s.slug}.html`} key={s.slug}>
                   {s.heroImage && (
                     <div className="story-img-wrapper">
-                      <img className="story-img" src={s.heroImage} alt={s.title} loading="lazy" />
+                      <img className="story-img" src={asset(s.heroImage)} alt={s.title} loading="lazy" />
                     </div>
                   )}
                   <div className="story-card-body">

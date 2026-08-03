@@ -6,7 +6,11 @@ import * as cheerio from 'cheerio';
 const SKIP = new Set(['index.html', 'stories.html', 'sitemap.html', 'gate.html']);
 const files = fs.readdirSync('preview').filter((f) => f.endsWith('.html') && !SKIP.has(f));
 
-const norm = (u) => (u || '').replace(/^\.?\//, '').split('#')[0];
+const norm = (u) =>
+  (u || '')
+    .replace(/^\/zahrahasanaatconsolidation\//, '')
+    .replace(/^\.?\//, '')
+    .split('#')[0];
 let ok = 0;
 const problems = [];
 for (const f of files) {
