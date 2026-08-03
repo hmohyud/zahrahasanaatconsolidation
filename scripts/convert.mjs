@@ -498,6 +498,12 @@ function convertFile(file) {
   // resolve tokens (they survive turndown as bare text lines)
   md = resolveTokens(md);
 
+  // canonical image paths: leading slash (what Tina's media manager writes)
+  md = md
+    .replace(/\]\(assets\/uploads\//g, '](/assets/uploads/')
+    .replace(/image="assets\/uploads\//g, 'image="/assets/uploads/')
+    .replace(/poster="assets\/uploads\//g, 'poster="/assets/uploads/');
+
   // tidy: collapse extra blank lines & repeated rules; collapse residual
   // 4+ asterisk runs from exotic em/strong nesting (adjacent cases were
   // already merged in the DOM, so any leftover is an em+strong boundary)
@@ -533,7 +539,7 @@ function convertFile(file) {
   } else if (heroP) {
     data.subtitle = heroP;
   }
-  if (heroImage) data.heroImage = heroImage;
+  if (heroImage) data.heroImage = heroImage.startsWith('assets/') ? `/${heroImage}` : heroImage;
   if (!isStory && related.length) data.related = related;
 
   const out = matter.stringify(`\n${md}\n`, data);

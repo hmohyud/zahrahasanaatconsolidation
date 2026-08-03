@@ -3,7 +3,7 @@
     "eyebrow": "Zahra Hasanaat",
     "title": "Service. Education.\nHarmony.",
     "text": "Founded on the vision of Syedna Khuzaima Qutbuddin RA, Zahra Hasanaat uplifts communities through education, healthcare, financial inclusion, interfaith dialogue, and compassionate service.",
-    "image": "assets/uploads/mazaar/2022/04/roza-sunset-scaled.jpg",
+    "image": "/assets/uploads/mazaar/2022/04/roza-sunset-scaled.jpg",
     "buttons": [
       { "label": "Explore Our Programs", "href": "#programs", "outline": false },
       { "label": "Support Our Work", "href": "contribute.html", "outline": true }
@@ -68,7 +68,7 @@
     "eyebrow": "Mazaar-e-Qutbi",
     "title": "Raudat-un-Noor",
     "text": "The mausoleum of the 53rd Dai al-Mutlaq, Syedna Khuzaima Qutbuddin RA, in Thane, Maharashtra — “an embodiment of knowledge and light.” A place of peace and reflection, home to a social welfare centre serving the surrounding community.",
-    "image": "assets/uploads/mazaar/2022/11/syedna-putting-sandal-qabar-scaled.jpg",
+    "image": "/assets/uploads/mazaar/2022/11/syedna-putting-sandal-qabar-scaled.jpg",
     "buttonLabel": "Visit Raudat-un-Noor",
     "buttonHref": "mazaar.html"
   },
