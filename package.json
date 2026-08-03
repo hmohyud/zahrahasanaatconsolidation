@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tinacms dev -c \"next dev -p 3001\"",
-    "dev:plain": "next dev -p 3001",
+    "dev": "tinacms dev -c \"next dev -p 3000\"",
+    "dev:plain": "next dev -p 3000",
     "build": "next build",
     "build:admin": "tinacms build",
     "convert": "node scripts/convert.mjs",

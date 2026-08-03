@@ -316,7 +316,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   inset: 0;
   z-index: 1;
   opacity: 0.07;
-  background-image: url("data:image/svg+xml,%3Csvg width='88' height='88' viewBox='0 0 88 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Cpath d='M44 -8 L52 0 44 8 36 0 Z'/%3E%3Cpath d='M44 80 L52 88 44 96 36 88 Z'/%3E%3Cpath d='M-8 44 L0 36 8 44 0 52 Z'/%3E%3Cpath d='M80 44 L88 36 96 44 88 52 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M18.75 0 H45.25 L64 18.75 V45.25 L45.25 64 H18.75 L0 45.25 V18.75 Z'/%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .hero-inner {
@@ -433,7 +433,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   position: absolute;
   inset: 0;
   opacity: 0.08;
-  background-image: url("data:image/svg+xml,%3Csvg width='88' height='88' viewBox='0 0 88 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Cpath d='M44 -8 L52 0 44 8 36 0 Z'/%3E%3Cpath d='M44 80 L52 88 44 96 36 88 Z'/%3E%3Cpath d='M-8 44 L0 36 8 44 0 52 Z'/%3E%3Cpath d='M80 44 L88 36 96 44 88 52 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M18.75 0 H45.25 L64 18.75 V45.25 L45.25 64 H18.75 L0 45.25 V18.75 Z'/%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 .section-primary h2, .section-primary h3 { color: white; }
 .section-primary p { color: rgba(255,255,255,0.6); }
@@ -600,7 +600,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   position: absolute;
   inset: 0;
   opacity: 0.10;
-  background-image: url("data:image/svg+xml,%3Csvg width='88' height='88' viewBox='0 0 88 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Cpath d='M44 -8 L52 0 44 8 36 0 Z'/%3E%3Cpath d='M44 80 L52 88 44 96 36 88 Z'/%3E%3Cpath d='M-8 44 L0 36 8 44 0 52 Z'/%3E%3Cpath d='M80 44 L88 36 96 44 88 52 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M18.75 0 H45.25 L64 18.75 V45.25 L45.25 64 H18.75 L0 45.25 V18.75 Z'/%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 .story-img-wrapper.is-ph svg { width: 44px; height: 44px; color: rgba(255,255,255,0.55); position: relative; }
 
@@ -681,7 +681,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   position: absolute;
   inset: 0;
   opacity: 0.07;
-  background-image: url("data:image/svg+xml,%3Csvg width='88' height='88' viewBox='0 0 88 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Cpath d='M44 -8 L52 0 44 8 36 0 Z'/%3E%3Cpath d='M44 80 L52 88 44 96 36 88 Z'/%3E%3Cpath d='M-8 44 L0 36 8 44 0 52 Z'/%3E%3Cpath d='M80 44 L88 36 96 44 88 52 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M18.75 0 H45.25 L64 18.75 V45.25 L45.25 64 H18.75 L0 45.25 V18.75 Z'/%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .cta {
@@ -1025,7 +1025,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   inset: 0;
   z-index: -1;
   opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg width='88' height='88' viewBox='0 0 88 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Cpath d='M44 -8 L52 0 44 8 36 0 Z'/%3E%3Cpath d='M44 80 L52 88 44 96 36 88 Z'/%3E%3Cpath d='M-8 44 L0 36 8 44 0 52 Z'/%3E%3Cpath d='M80 44 L88 36 96 44 88 52 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M18.75 0 H45.25 L64 18.75 V45.25 L45.25 64 H18.75 L0 45.25 V18.75 Z'/%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .page-hero-inner { max-width: 760px; margin: 0 auto; }
@@ -1616,7 +1616,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   position: absolute;
   inset: 0;
   opacity: 0.08;
-  background-image: url("data:image/svg+xml,%3Csvg width='88' height='88' viewBox='0 0 88 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Crect x='22' y='22' width='44' height='44'/%3E%3Crect x='22' y='22' width='44' height='44' transform='rotate(45 44 44)'/%3E%3Cpath d='M44 -8 L52 0 44 8 36 0 Z'/%3E%3Cpath d='M44 80 L52 88 44 96 36 88 Z'/%3E%3Cpath d='M-8 44 L0 36 8 44 0 52 Z'/%3E%3Cpath d='M80 44 L88 36 96 44 88 52 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M18.75 0 H45.25 L64 18.75 V45.25 L45.25 64 H18.75 L0 45.25 V18.75 Z'/%3E%3Cpath d='M32 0 L64 32 L32 64 L0 32 Z'/%3E%3C/g%3E%3C/svg%3E");
 }
 .feature-body > * { position: relative; z-index: 1; }
 .feature-body h5 { color: var(--color-accent); letter-spacing: 0.16em; margin-bottom: 0.6rem; }
