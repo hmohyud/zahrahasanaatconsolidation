@@ -1,0 +1,57 @@
+/**
+ * Renders a Tina rich-text body inside .page-content, mapping the custom
+ * block templates (tina/templates.ts) to the site's museum-styled markup.
+ */
+import React from 'react';
+import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
+import { asset } from '../lib/url';
+
+const components = {
+  MediaText: (props: any) => (
+    <div className={`media-row${props?.mediaRight ? ' media-row--right' : ''}`}>
+      {props?.image && (
+        <figure className="media-row-media">
+          <img src={asset(props.image)} alt={props?.alt || ''} loading="lazy" />
+        </figure>
+      )}
+      <div className="media-row-body">
+        <TinaMarkdown content={props?.children} components={components as any} />
+      </div>
+    </div>
+  ),
+  CoverCard: (props: any) => (
+    <div className="highlight-card">
+      <TinaMarkdown content={props?.children} components={components as any} />
+    </div>
+  ),
+  Gallery: (props: any) => (
+    <div className="img-gallery">
+      <TinaMarkdown content={props?.children} components={components as any} />
+    </div>
+  ),
+  Embed: (props: any) => (
+    <div
+      className="video-embed"
+      style={props?.aspect ? { aspectRatio: `100 / ${props.aspect}` } : undefined}
+    >
+      <iframe src={props?.url} title={props?.title || 'Embedded content'} allowFullScreen />
+    </div>
+  ),
+  VideoFile: (props: any) => (
+    <figure className="video-figure">
+      <video controls preload="none" poster={props?.poster || undefined} src={props?.src} style={{ width: '100%' }} />
+    </figure>
+  ),
+  ButtonRow: (props: any) => (
+    <div className="btn-row">
+      <TinaMarkdown content={props?.children} components={components as any} />
+    </div>
+  ),
+  img: (props: any) => <img src={asset(props?.url)} alt={props?.alt || ''} loading="lazy" />,
+  html: (props: any) => <div dangerouslySetInnerHTML={{ __html: props?.value || '' }} />,
+  html_inline: (props: any) => <span dangerouslySetInnerHTML={{ __html: props?.value || '' }} />,
+};
+
+export default function RichBody({ content }: { content: TinaMarkdownContent }) {
+  return <TinaMarkdown content={content} components={components as any} />;
+}

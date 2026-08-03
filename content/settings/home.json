@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "eyebrow": "Zahra Hasanaat",
+    "title": "Service. Education.\nHarmony.",
+    "text": "Founded on the vision of Syedna Khuzaima Qutbuddin RA, Zahra Hasanaat uplifts communities through education, healthcare, financial inclusion, interfaith dialogue, and compassionate service.",
+    "image": "assets/uploads/mazaar/2022/04/roza-sunset-scaled.jpg",
+    "buttons": [
+      { "label": "Explore Our Programs", "href": "#programs", "outline": false },
+      { "label": "Support Our Work", "href": "contribute.html", "outline": true }
+    ]
+  },
+  "welcome": {
+    "arabic": "الخلق عيال الله، واحب الخلق الى الله انفعهم لعياله",
+    "quote": "“All of creation are the children of God, and the most beloved to God of those children is the one who benefits His children the most.”",
+    "cite": "— Rasulullah SA",
+    "body": "Established in 1996, Zahra Hasanaat helps individuals and families realise their aspirations in health, education, and finance — guided by the belief that upliftment, not charity, benefits both the giver and the receiver and builds a society rooted in dignity, harmony, and compassion."
+  },
+  "programs": [
+    {
+      "title": "Education",
+      "text": "The Qutbi Jubilee Scholarship Program supports students from primary school through higher education with scholarships, mentorship, and career guidance.",
+      "href": "education.html",
+      "icon": "book"
+    },
+    {
+      "title": "Interfaith",
+      "text": "Taqreeb fosters inter- and intra-faith understanding through academic conferences, grassroots community service, and dialogue.",
+      "href": "interfaith.html",
+      "icon": "globe"
+    },
+    {
+      "title": "Health",
+      "text": "Medical camps, mental health awareness, dental care, eye care, insurance guidance, and wellness webinars for underserved communities.",
+      "href": "health.html",
+      "icon": "heart"
+    },
+    {
+      "title": "Financial Advisory",
+      "text": "Financial literacy, livelihood support, small business loans, and advisory services to help families achieve economic stability.",
+      "href": "financial.html",
+      "icon": "coin"
+    },
+    {
+      "title": "Food Security",
+      "text": "Food distribution programs ensuring no family goes hungry, guided by the Qur’anic principle of feeding and clothing those in need.",
+      "href": "food.html",
+      "icon": "shield"
+    },
+    {
+      "title": "Mazaar-e-Qutbi",
+      "text": "Raudat-un-Noor — the mausoleum of Syedna Khuzaima Qutbuddin RA in Thane, Maharashtra. A place of peace, reflection, and community welfare.",
+      "href": "mazaar.html",
+      "icon": "home"
+    }
+  ],
+  "impact": [
+    { "number": "296+", "label": "Scholarships Awarded" },
+    { "number": "45%", "label": "Women & Girls" },
+    { "number": "6", "label": "Program Pillars" },
+    { "number": "25+", "label": "Years of Service" }
+  ],
+  "featuredStories": [
+    "story-dental-camp-at-welfare-center",
+    "story-community-conversations-education",
+    "story-community-conversations-livelihood-series"
+  ],
+  "feature": {
+    "eyebrow": "Mazaar-e-Qutbi",
+    "title": "Raudat-un-Noor",
+    "text": "The mausoleum of the 53rd Dai al-Mutlaq, Syedna Khuzaima Qutbuddin RA, in Thane, Maharashtra — “an embodiment of knowledge and light.” A place of peace and reflection, home to a social welfare centre serving the surrounding community.",
+    "image": "assets/uploads/mazaar/2022/11/syedna-putting-sandal-qabar-scaled.jpg",
+    "buttonLabel": "Visit Raudat-un-Noor",
+    "buttonHref": "mazaar.html"
+  },
+  "cta": {
+    "title": "Make a Difference Today",
+    "text": "Whether through a donation, volunteering your time, or applying for support — every action creates ripples of positive change.",
+    "buttons": [
+      { "label": "Contribute", "href": "contribute.html", "outline": false },
+      { "label": "Get Involved", "href": "get-involved.html", "outline": true }
+    ]
+  }
+}

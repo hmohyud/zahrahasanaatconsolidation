@@ -20,3 +20,15 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# ---- Next.js + TinaCMS build artifacts ----
+node_modules/
+.next/
+/out/
+/tina/__generated__/
+/public/admin/
+*.tsbuildinfo
+
+# The original static site is now the LOCAL conversion source only —
+# content/ is the source of truth; out/ is what deploys.
+/preview/
