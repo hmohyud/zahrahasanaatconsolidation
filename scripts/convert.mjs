@@ -277,7 +277,7 @@ function transform($, root) {
       $el.remove();
       return;
     }
-    const mdx = `<Gallery>\n${imgs.join('\n')}\n</Gallery>`;
+    const mdx = `<Gallery>\n${imgs.join('\n\n')}\n</Gallery>`;
     $el.replaceWith(token(mdx));
   });
 
@@ -307,6 +307,43 @@ function transform($, root) {
     const wrapper = $el.closest('.video-embed, .video-figure, figure');
     (wrapper.length ? wrapper : $el).replaceWith(token(mdx));
   });
+
+  // 10a2. collage grouping: runs of 2+ consecutive standalone images
+  // (bare <img>, image-only <p>, or caption-less <figure>) become one
+  // <Gallery> block instead of a clumsy stack of full-width photos
+  {
+    const isImageOnly = (node) => {
+      if (node.type !== 'tag') return false;
+      const $n = $(node);
+      if (node.name === 'img') return true;
+      if ((node.name === 'p' || node.name === 'figure') && $n.find('img').length >= 1) {
+        return BLANK.test($n.text()) && !$n.find('iframe, video, a').length;
+      }
+      return false;
+    };
+    const isBlankText = (node) => node.type === 'text' && BLANK.test(node.data || '');
+    const kids = root.contents().toArray();
+    let run = [];
+    const flushRun = () => {
+      if (run.length >= 2) {
+        const imgs = run.flatMap((n) => {
+          const el = $(n);
+          const list = n.name === 'img' ? [n] : el.find('img').toArray();
+          return list.map((im) => `![${esc($(im).attr('alt') || '')}](${$(im).attr('src')})`);
+        });
+        const mdx = `<Gallery>\n${imgs.join('\n\n')}\n</Gallery>`;
+        $(run[0]).before(token(mdx));
+        run.forEach((n) => $(n).remove());
+      }
+      run = [];
+    };
+    for (const node of kids) {
+      if (isImageOnly(node)) run.push(node);
+      else if (isBlankText(node) && run.length) continue; // whitespace between images
+      else flushRun();
+    }
+    flushRun();
+  }
 
   // 10b. collapse nested emphasis (WP exports nest <strong><strong>…) — nested
   // tags turn into broken ****text**** markdown otherwise
