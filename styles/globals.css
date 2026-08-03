@@ -23,9 +23,9 @@
   --content-width: 780px;
   --wide-width: 1200px;
   --header-height: 64px;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-lg: 20px;
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-lg: 0;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
@@ -382,7 +382,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   align-items: center;
   justify-content: center;
   padding: 0.95em 2.1em;
-  border-radius: 2px;
+  border-radius: 0;
   font-family: var(--font-primary);
   font-weight: 600;
   font-size: 0.74rem;
@@ -772,7 +772,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   right: 1.5rem;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--color-foreground);
   color: white;
   border: none;
@@ -846,7 +846,7 @@ nav .subsubmenu a.active { font-weight: 600; }
     text-transform: uppercase;
     letter-spacing: 0.1em;
     min-height: auto;
-    border-radius: 2px;
+    border-radius: 0;
     color: var(--color-foreground);
     font-weight: 600;
   }
@@ -854,7 +854,7 @@ nav .subsubmenu a.active { font-weight: 600; }
     padding: 0.45rem 0.8rem;
     font-size: 0.85rem;
     min-height: auto;
-    border-radius: 2px;
+    border-radius: 0;
     color: var(--color-muted);
     font-weight: 500;
   }
@@ -1256,7 +1256,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   color: #fff !important;
   border: 1px solid var(--color-secondary) !important;
   padding: 0.9em 1.9em;
-  border-radius: 2px;
+  border-radius: 0;
   font-weight: 600;
   font-size: 0.74rem;
   text-transform: uppercase;
@@ -1533,7 +1533,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   width: 4px;
   height: 8px;
   background: #fff;
-  border-radius: 2px;
+  border-radius: 0;
   margin-top: 7px;
   animation: scrollDot 1.6s ease-in-out infinite;
 }
@@ -1661,7 +1661,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.55rem 1.1rem;
-  border-radius: 2px;
+  border-radius: 0;
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-muted);
@@ -1693,7 +1693,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   background: transparent;
   border: 1px solid var(--color-border);
   padding: 0.35rem 0.85rem;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 /* Video figure + caption */
@@ -1724,7 +1724,7 @@ nav .subsubmenu a.active { font-weight: 600; }
 .lightbox img {
   max-width: 92vw;
   max-height: 84vh;
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 16px 56px rgba(0,0,0,0.5);
   transform: scale(0.95);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1748,7 +1748,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   color: #fff;
   font-size: 1.8rem;
   line-height: 1;
-  border-radius: 50%;
+  border-radius: 0;
   cursor: pointer;
   transition: background var(--transition);
 }
@@ -1891,7 +1891,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   color: #fff !important;
   border: 1px solid var(--color-secondary);
   padding: 0.9em 1.9em;
-  border-radius: 2px;
+  border-radius: 0;
   font-weight: 600;
   font-size: 0.74rem;
   text-transform: uppercase;
@@ -1901,3 +1901,75 @@ nav .subsubmenu a.active { font-weight: 600; }
   transition: background var(--transition), border-color var(--transition);
 }
 .btn-row a:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+
+/* ========================================================================
+   SHARP PASS — flat, hairline, museum-crisp refinements
+   ======================================================================== */
+
+/* Gold-tinted selection — tiny, quiet flourish */
+::selection { background: rgba(200, 169, 81, 0.28); color: var(--color-foreground); }
+
+/* Content photographs read as matted, framed prints */
+.page-content img,
+.page-content figure img,
+.page-content .wp-block-image img,
+.page-content .img-gallery img,
+.media-row-media img {
+  background: #fff;
+  padding: 5px;
+  border: 1px solid var(--color-border);
+}
+
+/* Sand bands get hairline edges so the sections feel set, not floated */
+.section-alt { border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+
+/* Tables as sharp museum data plates.
+   (!important beats the inline styles TinaMarkdown hardcodes on cells.) */
+.page-content table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-border) !important;
+}
+.page-content th, .page-content td {
+  padding: 0.7rem 1rem !important;
+  border: 1px solid var(--color-border) !important;
+  text-align: left !important;
+}
+.page-content tr:nth-child(even) td { background: rgba(243, 236, 222, 0.45); }
+@media (max-width: 560px) {
+  .page-content table { display: block; overflow-x: auto; }
+}
+
+/* Content dividers become a short centred gold rule (matches section titles) */
+.page-content hr,
+.page-content .wp-block-separator {
+  border: none;
+  height: 1px;
+  width: 64px;
+  margin: 2.75rem auto;
+  background: linear-gradient(to right, transparent, var(--color-accent) 18%, var(--color-accent) 82%, transparent);
+}
+
+/* Dropdown panels: crisp hairline sheets, not soft floating cards */
+@media (min-width: 1024px) {
+  nav .submenu, nav .subsubmenu {
+    box-shadow: 0 2px 10px rgba(28, 42, 36, 0.10);
+    border: 1px solid var(--color-border);
+  }
+}
+
+/* External links in the nav carry a small open-in-new glyph */
+nav a .ext-icon {
+  width: 0.65em;
+  height: 0.65em;
+  margin-left: 0.35em;
+  flex-shrink: 0;
+  opacity: 0.65;
+}
+nav a:hover .ext-icon { opacity: 1; }
+
+/* Squared back-to-top keeps its glyph centred */
+.back-to-top { border: 1px solid rgba(255, 255, 255, 0.18); }

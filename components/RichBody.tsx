@@ -48,6 +48,14 @@ const components = {
     </div>
   ),
   img: (props: any) => <img src={asset(props?.url)} alt={props?.alt || ''} loading="lazy" />,
+  a: (props: any) =>
+    /^https?:\/\//.test(props?.url || '') ? (
+      <a href={props.url} target="_blank" rel="noopener noreferrer">
+        {props.children}
+      </a>
+    ) : (
+      <a href={props?.url}>{props.children}</a>
+    ),
   html: (props: any) => <div dangerouslySetInnerHTML={{ __html: props?.value || '' }} />,
   html_inline: (props: any) => <span dangerouslySetInnerHTML={{ __html: props?.value || '' }} />,
 };

@@ -18,12 +18,33 @@ export type SiteSettings = {
   };
 };
 
+const isExternal = (href?: string) => /^https?:\/\//.test(href || '');
+
+/** Small open-in-new-tab glyph shown after external nav links. */
+function ExtIcon() {
+  return (
+    <svg
+      className="ext-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="square"
+      aria-hidden="true"
+    >
+      <path d="M7 17L17 7" />
+      <path d="M9 7h8v8" />
+    </svg>
+  );
+}
+
 function NavList({ items, depth = 0 }: { items: NavItem[]; depth?: number }) {
   return (
     <ul className={depth === 1 ? 'submenu' : depth === 2 ? 'subsubmenu' : undefined}>
       {items.map((item, i) => {
         const kids = item.children?.filter((c) => c && c.label) || [];
         const hasKids = kids.length > 0;
+        const ext = isExternal(item.href);
         const cls =
           depth === 0
             ? hasKids
@@ -34,7 +55,13 @@ function NavList({ items, depth = 0 }: { items: NavItem[]; depth?: number }) {
               : undefined;
         return (
           <li key={i} className={cls}>
-            <a href={item.href}>{item.label}</a>
+            <a
+              href={item.href}
+              {...(ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {item.label}
+              {ext && <ExtIcon />}
+            </a>
             {hasKids && <NavList items={kids} depth={depth + 1} />}
           </li>
         );

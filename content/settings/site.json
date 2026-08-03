@@ -49,7 +49,8 @@
         },
         { "label": "Health", "href": "health.html" },
         { "label": "Financial Advisory", "href": "financial.html" },
-        { "label": "Food Security", "href": "food.html" }
+        { "label": "Food Security", "href": "food.html" },
+        { "label": "Humrahe Khair", "href": "https://humrahekhair.zahrahasanaat.org/" }
       ]
     },
     {
@@ -67,7 +68,6 @@
       ]
     },
     { "label": "Stories", "href": "stories.html" },
-    { "label": "Humrahe Khair", "href": "https://humrahekhair.zahrahasanaat.org/" },
     {
       "label": "Connect",
       "href": "connect.html",

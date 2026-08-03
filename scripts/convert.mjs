@@ -60,6 +60,15 @@ function makeTurndown() {
   });
   // keep line breaks inside paragraphs meaningful
   td.addRule('lineBreak', { filter: 'br', replacement: () => '  \n' });
+  // images: drop filename-style alt text
+  td.addRule('image', {
+    filter: 'img',
+    replacement: (_c, node) => {
+      const src = node.getAttribute('src') || '';
+      if (!src) return '';
+      return `![${cleanAlt(node.getAttribute('alt'), src)}](${src})`;
+    },
+  });
   return td;
 }
 const td = makeTurndown();
@@ -118,6 +127,30 @@ function innerToMdx($, el) {
 
 function esc(v) {
   return String(v ?? '').replace(/"/g, '&quot;');
+}
+
+/**
+ * Drop alt text that is just the image's filename (WordPress default) —
+ * "Asset 3 5", "IMG_0841", etc. It reads as junk under lightboxed images
+ * and is worthless for accessibility. Real descriptive alts are kept.
+ */
+function cleanAlt(alt, src) {
+  if (!alt) return '';
+  const base = String(src || '').split('/').pop().replace(/\.\w+$/, '');
+  const norm = (s) =>
+    String(s)
+      .toLowerCase()
+      .replace(/e\d{8,}/g, '')
+      .replace(/\d+x\d+/g, '')
+      .replace(/scaled|edited|copy/g, '')
+      .replace(/[^a-z]/g, '');
+  const a = norm(alt);
+  const b = norm(base);
+  if (!a) return '';
+  if (a === b) return '';
+  if (b.length >= 4 && (b.includes(a) || a.includes(b))) return '';
+  if (/^(asset|img|image|dsc|mg|photo|screenshot|untitled|banner|logo)$/.test(a)) return '';
+  return alt;
 }
 
 /* ---------------- the main structural transform ---------------- */
@@ -198,7 +231,7 @@ function transform($, root) {
     if (img.length) {
       const right = ($el.attr('class') || '').includes('has-media-on-the-right');
       const childMd = innerToMdx($, inner);
-      const mdx = `<MediaText image="${esc(img.attr('src'))}" alt="${esc(img.attr('alt') || '')}"${right ? ' mediaRight={true}' : ''}>\n${childMd}\n</MediaText>`;
+      const mdx = `<MediaText image="${esc(img.attr('src'))}" alt="${esc(cleanAlt(img.attr('alt'), img.attr('src')))}"${right ? ' mediaRight={true}' : ''}>\n${childMd}\n</MediaText>`;
       $el.replaceWith(token(mdx));
     } else {
       $el.replaceWith(inner.html() || '');
@@ -272,7 +305,7 @@ function transform($, root) {
     const imgs = $el
       .find('img')
       .toArray()
-      .map((im) => `![${esc($(im).attr('alt') || '')}](${$(im).attr('src')})`);
+      .map((im) => `![${esc(cleanAlt($(im).attr('alt'), $(im).attr('src')))}](${$(im).attr('src')})`);
     if (!imgs.length) {
       $el.remove();
       return;
@@ -329,7 +362,7 @@ function transform($, root) {
         const imgs = run.flatMap((n) => {
           const el = $(n);
           const list = n.name === 'img' ? [n] : el.find('img').toArray();
-          return list.map((im) => `![${esc($(im).attr('alt') || '')}](${$(im).attr('src')})`);
+          return list.map((im) => `![${esc(cleanAlt($(im).attr('alt'), $(im).attr('src')))}](${$(im).attr('src')})`);
         });
         const mdx = `<Gallery>\n${imgs.join('\n\n')}\n</Gallery>`;
         $(run[0]).before(token(mdx));
