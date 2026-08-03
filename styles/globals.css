@@ -1516,7 +1516,8 @@ nav .subsubmenu a.active { font-weight: 600; }
 /* Scroll cue */
 .hero-scroll {
   position: absolute;
-  bottom: 1.5rem;
+  /* keep the cue inside the hero's inset frame line (frame inset + gap) */
+  bottom: calc(clamp(14px, 2.2vw, 30px) + 14px);
   left: 50%;
   transform: translateX(-50%);
   width: 26px;
