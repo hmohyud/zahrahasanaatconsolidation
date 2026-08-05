@@ -1,15 +1,30 @@
 {
   "siteTitle": "Zahra Hasanaat",
   "nav": [
-    { "label": "Home", "href": "index.html" },
+    {
+      "label": "Home",
+      "href": "index.html"
+    },
     {
       "label": "About",
       "href": "about.html",
       "children": [
-        { "label": "About Zahra Hasanaat", "href": "about.html" },
-        { "label": "Syedna Qutbuddin RA", "href": "syedna-qutbuddin.html" },
-        { "label": "Syedna Fakhruddin TUS", "href": "syedna-fakhruddin.html" },
-        { "label": "The Zahra Hasanaat Centre", "href": "centre.html" }
+        {
+          "label": "About Zahra Hasanaat",
+          "href": "about.html"
+        },
+        {
+          "label": "Syedna Qutbuddin RA",
+          "href": "syedna-qutbuddin.html"
+        },
+        {
+          "label": "Syedna Fakhruddin TUS",
+          "href": "syedna-fakhruddin.html"
+        },
+        {
+          "label": "The Zahra Hasanaat Centre",
+          "href": "centre.html"
+        }
       ]
     },
     {
@@ -20,64 +35,166 @@
           "label": "Education (QJSP)",
           "href": "education.html",
           "children": [
-            { "label": "Education Overview", "href": "education.html" },
-            { "label": "About QJSP", "href": "qjsp-about.html" },
-            { "label": "Higher Education", "href": "qjsp-higher-education.html" },
-            { "label": "Primary Education", "href": "qjsp-primary-education.html" },
-            { "label": "The Harmony Prize", "href": "qjsp-harmony-prize.html" },
-            { "label": "Community Service", "href": "qjsp-community-service.html" },
-            { "label": "Conferences", "href": "qjsp-conferences.html" },
-            { "label": "Scholarship Application", "href": "qjsp-application.html" },
-            { "label": "Donate to QJSP", "href": "qjsp-donate.html" },
-            { "label": "Contact QJSP", "href": "qjsp-contact.html" }
+            {
+              "label": "Education Overview",
+              "href": "education.html"
+            },
+            {
+              "label": "About QJSP",
+              "href": "qjsp-about.html"
+            },
+            {
+              "label": "Higher Education",
+              "href": "qjsp-higher-education.html"
+            },
+            {
+              "label": "Primary Education",
+              "href": "qjsp-primary-education.html"
+            },
+            {
+              "label": "The Harmony Prize",
+              "href": "qjsp-harmony-prize.html"
+            },
+            {
+              "label": "Community Service",
+              "href": "qjsp-community-service.html"
+            },
+            {
+              "label": "Conferences",
+              "href": "qjsp-conferences.html"
+            },
+            {
+              "label": "Scholarship Application",
+              "href": "qjsp-application.html"
+            },
+            {
+              "label": "Donate to QJSP",
+              "href": "qjsp-donate.html"
+            },
+            {
+              "label": "Contact QJSP",
+              "href": "qjsp-contact.html"
+            }
           ]
         },
         {
           "label": "Interfaith (Taqreeb)",
           "href": "interfaith.html",
           "children": [
-            { "label": "Interfaith Overview", "href": "interfaith.html" },
-            { "label": "About Taqreeb", "href": "taqreeb-about.html" },
-            { "label": "Taqreeb (Site Overview)", "href": "taqreeb-overview.html" },
-            { "label": "2017 Conference", "href": "taqreeb-2017-conference.html" },
-            { "label": "2016 Conference", "href": "taqreeb-2016-conference.html" },
-            { "label": "Taqreeb Stories", "href": "taqreeb-stories.html" },
-            { "label": "Portfolio", "href": "taqreeb-portfolio.html" },
-            { "label": "FAQ", "href": "taqreeb-faq.html" },
-            { "label": "Contact Taqreeb", "href": "taqreeb-contact.html" }
+            {
+              "label": "Interfaith Overview",
+              "href": "interfaith.html"
+            },
+            {
+              "label": "About Taqreeb",
+              "href": "taqreeb-about.html"
+            },
+            {
+              "label": "Taqreeb (Site Overview)",
+              "href": "taqreeb-overview.html"
+            },
+            {
+              "label": "2017 Conference",
+              "href": "taqreeb-2017-conference.html"
+            },
+            {
+              "label": "2016 Conference",
+              "href": "taqreeb-2016-conference.html"
+            },
+            {
+              "label": "Taqreeb Stories",
+              "href": "taqreeb-stories.html"
+            }
           ]
         },
-        { "label": "Health", "href": "health.html" },
-        { "label": "Financial Advisory", "href": "financial.html" },
-        { "label": "Food Security", "href": "food.html" },
-        { "label": "Humrahe Khair 2025", "href": "https://humrahekhair.zahrahasanaat.org/" }
+        {
+          "label": "Health",
+          "href": "health.html"
+        },
+        {
+          "label": "Financial Advisory",
+          "href": "financial.html"
+        },
+        {
+          "label": "Food Security",
+          "href": "food.html"
+        },
+        {
+          "label": "Humrahe Khair 2025",
+          "href": "https://humrahekhair.zahrahasanaat.org/"
+        }
       ]
     },
     {
       "label": "Mazaar-e-Qutbi",
       "href": "mazaar.html",
       "children": [
-        { "label": "About Raudat-un-Noor", "href": "mazaar.html" },
-        { "label": "The Mausoleum", "href": "mazaar-mausoleum.html" },
-        { "label": "An Embodiment of Light", "href": "mazaar-embodiment.html" },
-        { "label": "Qur'an Majeed Inscription", "href": "mazaar-quran-inscription.html" },
-        { "label": "About Darus Sakina", "href": "mazaar-darus-sakina.html" },
-        { "label": "The Iftitah", "href": "mazaar-iftitah.html" },
-        { "label": "Social Welfare Center", "href": "mazaar-welfare.html" },
-        { "label": "Guided Tours", "href": "mazaar-tours.html" }
+        {
+          "label": "About Raudat-un-Noor",
+          "href": "mazaar.html"
+        },
+        {
+          "label": "The Mausoleum",
+          "href": "mazaar-mausoleum.html"
+        },
+        {
+          "label": "An Embodiment of Light",
+          "href": "mazaar-embodiment.html"
+        },
+        {
+          "label": "Qur'an Majeed Inscription",
+          "href": "mazaar-quran-inscription.html"
+        },
+        {
+          "label": "About Darus Sakina",
+          "href": "mazaar-darus-sakina.html"
+        },
+        {
+          "label": "The Iftitah",
+          "href": "mazaar-iftitah.html"
+        },
+        {
+          "label": "Social Welfare Center",
+          "href": "mazaar-welfare.html"
+        },
+        {
+          "label": "Guided Tours",
+          "href": "mazaar-tours.html"
+        }
       ]
     },
-    { "label": "Stories", "href": "stories.html" },
+    {
+      "label": "Stories",
+      "href": "stories.html"
+    },
     {
       "label": "Connect",
       "href": "connect.html",
       "children": [
-        { "label": "Apply for Support", "href": "apply.html" },
-        { "label": "Contribute", "href": "contribute.html" },
-        { "label": "Get Involved", "href": "get-involved.html" },
-        { "label": "Art Wellness Workshop", "href": "art-wellness-workshop.html" },
-        { "label": "Contact", "href": "connect.html" },
-        { "label": "Site Index", "href": "sitemap.html" }
+        {
+          "label": "Apply for Support",
+          "href": "apply.html"
+        },
+        {
+          "label": "Contribute",
+          "href": "contribute.html"
+        },
+        {
+          "label": "Get Involved",
+          "href": "get-involved.html"
+        },
+        {
+          "label": "Art Wellness Workshop",
+          "href": "art-wellness-workshop.html"
+        },
+        {
+          "label": "Contact",
+          "href": "connect.html"
+        },
+        {
+          "label": "Site Index",
+          "href": "sitemap.html"
+        }
       ]
     }
   ],
@@ -89,22 +206,55 @@
       {
         "title": "Programs",
         "links": [
-          { "label": "Education (QJSP)", "href": "education.html" },
-          { "label": "Interfaith (Taqreeb)", "href": "interfaith.html" },
-          { "label": "Health", "href": "health.html" },
-          { "label": "Financial Advisory", "href": "financial.html" },
-          { "label": "Food Security", "href": "food.html" }
+          {
+            "label": "Education (QJSP)",
+            "href": "education.html"
+          },
+          {
+            "label": "Interfaith (Taqreeb)",
+            "href": "interfaith.html"
+          },
+          {
+            "label": "Health",
+            "href": "health.html"
+          },
+          {
+            "label": "Financial Advisory",
+            "href": "financial.html"
+          },
+          {
+            "label": "Food Security",
+            "href": "food.html"
+          }
         ]
       },
       {
         "title": "Quick Links",
         "links": [
-          { "label": "Mazaar-e-Qutbi", "href": "mazaar.html" },
-          { "label": "Stories", "href": "stories.html" },
-          { "label": "Apply for Support", "href": "apply.html" },
-          { "label": "Contribute", "href": "contribute.html" },
-          { "label": "Contact Us", "href": "connect.html" },
-          { "label": "Site Index", "href": "sitemap.html" }
+          {
+            "label": "Mazaar-e-Qutbi",
+            "href": "mazaar.html"
+          },
+          {
+            "label": "Stories",
+            "href": "stories.html"
+          },
+          {
+            "label": "Apply for Support",
+            "href": "apply.html"
+          },
+          {
+            "label": "Contribute",
+            "href": "contribute.html"
+          },
+          {
+            "label": "Contact Us",
+            "href": "connect.html"
+          },
+          {
+            "label": "Site Index",
+            "href": "sitemap.html"
+          }
         ]
       }
     ]

@@ -42,6 +42,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /zahrahasanaatconsolidation
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          TINA_SEARCH_TOKEN: ${{ secrets.TINA_SEARCH_TOKEN }}
           GITHUB_BRANCH: main
         run: |
           if [ -n "$NEXT_PUBLIC_TINA_CLIENT_ID" ] && [ -n "$TINA_TOKEN" ]; then

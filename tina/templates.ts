@@ -52,7 +52,31 @@ const buttonRowTemplate: Template = {
   ],
 };
 
-const leafTemplates: Template[] = [galleryTemplate, embedTemplate, videoFileTemplate, buttonRowTemplate];
+const contactCardTemplate: Template = {
+  name: 'ContactCard',
+  label: 'Contact Details',
+  fields: [
+    { type: 'string', name: 'heading', label: 'Heading (optional)' },
+    { type: 'string', name: 'email', label: 'Email address' },
+    { type: 'string', name: 'phone', label: 'Phone number' },
+    { type: 'string', name: 'hours', label: 'Phone hours (e.g. 9am – 5pm IST)' },
+    {
+      type: 'string',
+      name: 'address',
+      label: 'Postal address',
+      ui: { component: 'textarea' },
+    },
+    { type: 'string', name: 'note', label: 'Note below the details (optional)', ui: { component: 'textarea' } },
+  ],
+};
+
+const leafTemplates: Template[] = [
+  galleryTemplate,
+  embedTemplate,
+  videoFileTemplate,
+  buttonRowTemplate,
+  contactCardTemplate,
+];
 
 export const richTextTemplates: Template[] = [
   {

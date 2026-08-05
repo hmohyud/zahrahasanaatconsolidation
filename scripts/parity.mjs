@@ -9,6 +9,36 @@ import * as cheerio from 'cheerio';
 
 const SKIP = new Set(['index.html', 'stories.html', 'sitemap.html', 'gate.html']);
 
+/* Pages deliberately removed or rewritten after the migration (audited as
+   obsolete WordPress demo content or rebuilt as structured contact pages).
+   Parity is not expected for these — every OTHER page must still match. */
+const INTENTIONAL = new Map([
+  ['taqreeb-contact.html', 'deleted: one generic sentence, no contact details'],
+  ['taqreeb-faq.html', 'deleted: WordPress demo FAQ (return policy / shipping)'],
+  ['taqreeb-portfolio.html', 'deleted: WordPress demo portfolio ("Project Name")'],
+  ['story-qjsp-scholarship-application.html', 'deleted: expired 2019 deadline, duplicated'],
+  ['story-qjsp-about-homepage.html', 'merged into qjsp-about'],
+  ['qjsp-contact.html', 'rebuilt as a structured contact card'],
+  ['connect.html', 'rebuilt: contact card + consolidated buttons'],
+  ['interfaith.html', 'related links to the three deleted Taqreeb pages removed'],
+  ['taqreeb-stories.html', '"Tell us your story" repointed to connect'],
+]);
+
+/* Editorial placeholders removed from the prose ("link link", "PAYPAL CTA",
+   the dummy sponsorship row…). Stripped from the ORIGINAL text too so the
+   comparison stays word-exact on everything that is real content. */
+const PLACEHOLDERS = [
+  /(?:Read (?:more )?(?:stories|and see photos)?[^.\r\n]*?)?\blink link\.?/gi,
+  /Webinars include link, link\.\s*Camps include\s*link, link\./gi,
+  /Read more etc etc\.?/gi,
+  /Read more\.\.\./g,
+  /Link to camp/gi,
+  /PAYPAL CTA/gi,
+  /Sponsor\.\.\.\.|\u20b9xxxxx/gi,
+];
+const stripPlaceholders = (t) => PLACEHOLDERS.reduce((acc, re) => acc.replace(re, ' '), t);
+
+
 function textOf($, sel) {
   const el = $(sel).first();
   if (!el.length) return '';
@@ -32,6 +62,7 @@ function normWords(text) {
 
 const files = fs.readdirSync('preview').filter((f) => f.endsWith('.html') && !SKIP.has(f));
 let ok = 0;
+let intentional = 0;
 const problems = [];
 
 // minified export glues adjacent elements' text together — separate all tag
@@ -41,6 +72,7 @@ const readHtml = (p) =>
   fs.readFileSync(p, 'utf8').replace(/<!--.*?-->/g, ' ').replace(/></g, '> <');
 
 for (const f of files) {
+  if (INTENTIONAL.has(f)) { intentional++; continue; }
   const $old = cheerio.load(readHtml(path.join('preview', f)));
   const outFile = path.join('out', f);
   if (!fs.existsSync(outFile)) {
@@ -55,7 +87,7 @@ for (const f of files) {
   // new page: whole main + hero
   const newText = textOf($new, 'main') + ' ' + textOf($new, '.page-hero-inner');
 
-  const oldWords = normWords(oldText);
+  const oldWords = normWords(stripPlaceholders(oldText));
   const newWords = new Set(normWords(newText));
   // sliding check: report words missing from the new page
   const missing = [];
@@ -74,7 +106,8 @@ for (const f of files) {
   }
 }
 
-console.log(`${ok}/${files.length} pages have complete word-level parity`);
+console.log(`${ok}/${files.length - intentional} pages have complete word-level parity `
+  + `(${intentional} intentionally removed/rewritten)`);
 if (problems.length) {
   console.log('\nPages with missing words:');
   for (const p of problems) console.log(JSON.stringify(p));

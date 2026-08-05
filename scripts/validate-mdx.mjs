@@ -13,6 +13,10 @@ const leafTemplates = [
     { name: 'VideoFile', fields: [
       { type: 'string', name: 'src' }, { type: 'image', name: 'poster' } ] },
     { name: 'ButtonRow', fields: [ { type: 'rich-text', name: 'children' } ] },
+    { name: 'ContactCard', fields: [
+      { type: 'string', name: 'heading' }, { type: 'string', name: 'email' },
+      { type: 'string', name: 'phone' }, { type: 'string', name: 'hours' },
+      { type: 'string', name: 'address' }, { type: 'string', name: 'note' } ] },
   ];
 
 const bodyField = {

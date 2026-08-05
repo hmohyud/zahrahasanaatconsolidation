@@ -47,6 +47,39 @@ const components = {
       <TinaMarkdown content={props?.children} components={components as any} />
     </div>
   ),
+  ContactCard: (props: any) => {
+    const rows: [string, React.ReactNode][] = [];
+    if (props?.email)
+      rows.push(['Email', <a href={`mailto:${props.email}`}>{props.email}</a>]);
+    if (props?.phone)
+      rows.push([
+        'Phone',
+        <>
+          <a href={`tel:${String(props.phone).replace(/[^\d+]/g, '')}`}>{props.phone}</a>
+          {props?.hours && <span className="contact-hours">{props.hours}</span>}
+        </>,
+      ]);
+    if (props?.address)
+      rows.push([
+        'Address',
+        <span className="contact-address">{props.address}</span>,
+      ]);
+    if (!rows.length) return null;
+    return (
+      <div className="contact-card">
+        {props?.heading && <h3 className="contact-card-heading">{props.heading}</h3>}
+        <dl className="contact-rows">
+          {rows.map(([label, value]) => (
+            <div className="contact-row" key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+        {props?.note && <p className="contact-note">{props.note}</p>}
+      </div>
+    );
+  },
   img: (props: any) => <img src={asset(props?.url)} alt={props?.alt || ''} loading="lazy" />,
   a: (props: any) =>
     /^https?:\/\//.test(props?.url || '') ? (

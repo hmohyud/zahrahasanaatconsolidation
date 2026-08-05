@@ -9,6 +9,19 @@ const branch =
   process.env.HEAD ||
   'main';
 
+// Search token is separate from the content token (TinaCloud → Tokens → Search).
+// Declared only when present so builds/deploys still work without it.
+const searchToken = process.env.TINA_SEARCH_TOKEN;
+const search = searchToken
+  ? {
+      tina: { indexerToken: searchToken, stopwordLanguages: ['eng'] },
+      indexBatchSize: 100,
+      // default is 100 chars, which only indexes the opening line of a page —
+      // these are long-form articles, so index a meaningful slice of the body
+      maxSearchIndexFieldLength: 600,
+    }
+  : undefined;
+
 export default defineConfig({
   branch,
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || null,
@@ -27,6 +40,7 @@ export default defineConfig({
       publicFolder: 'public',
     },
   },
+  ...(search ? { search } : {}),
 
   schema: {
     collections: [
@@ -52,7 +66,7 @@ export default defineConfig({
             label: 'Subtitle (short line under the title)',
             ui: { component: 'textarea' },
           },
-          { type: 'image', name: 'heroImage', label: 'Hero background photo' },
+          { type: 'image', name: 'heroImage', label: 'Hero background photo', searchable: false },
           bodyField,
           {
             type: 'object',
@@ -70,7 +84,7 @@ export default defineConfig({
                 ui: { itemProps: (item: any) => ({ label: item?.label || 'Link' }) },
                 fields: [
                   { type: 'string', name: 'label', label: 'Label' },
-                  { type: 'string', name: 'href', label: 'Link (e.g. education.html)' },
+                  { type: 'string', name: 'href', label: 'Link (e.g. education.html)', searchable: false },
                 ],
               },
             ],
@@ -106,7 +120,7 @@ export default defineConfig({
             list: true,
             ui: { component: 'tags' },
           },
-          { type: 'image', name: 'heroImage', label: 'Hero / card photo' },
+          { type: 'image', name: 'heroImage', label: 'Hero / card photo', searchable: false },
           bodyField,
         ],
       },
@@ -131,13 +145,13 @@ export default defineConfig({
               { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
               { type: 'string', name: 'title', label: 'Headline', ui: { component: 'textarea' } },
               { type: 'string', name: 'text', label: 'Intro text', ui: { component: 'textarea' } },
-              { type: 'image', name: 'image', label: 'Background photo' },
+              { type: 'image', name: 'image', label: 'Background photo', searchable: false },
               {
                 type: 'object', name: 'buttons', label: 'Buttons', list: true,
                 ui: { itemProps: (item: any) => ({ label: item?.label || 'Button' }) },
                 fields: [
                   { type: 'string', name: 'label', label: 'Label' },
-                  { type: 'string', name: 'href', label: 'Link' },
+                  { type: 'string', name: 'href', label: 'Link', searchable: false },
                   { type: 'boolean', name: 'outline', label: 'Outline style' },
                 ],
               },
@@ -163,7 +177,7 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'title', label: 'Title' },
               { type: 'string', name: 'text', label: 'Description', ui: { component: 'textarea' } },
-              { type: 'string', name: 'href', label: 'Link' },
+              { type: 'string', name: 'href', label: 'Link', searchable: false },
               {
                 type: 'string', name: 'icon', label: 'Icon',
                 options: ['book', 'globe', 'heart', 'coin', 'shield', 'home'],
@@ -195,9 +209,9 @@ export default defineConfig({
               { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
               { type: 'string', name: 'title', label: 'Title' },
               { type: 'string', name: 'text', label: 'Text', ui: { component: 'textarea' } },
-              { type: 'image', name: 'image', label: 'Photo' },
+              { type: 'image', name: 'image', label: 'Photo', searchable: false },
               { type: 'string', name: 'buttonLabel', label: 'Button label' },
-              { type: 'string', name: 'buttonHref', label: 'Button link' },
+              { type: 'string', name: 'buttonHref', label: 'Button link', searchable: false },
             ],
           },
           {
@@ -212,7 +226,7 @@ export default defineConfig({
                 ui: { itemProps: (item: any) => ({ label: item?.label || 'Button' }) },
                 fields: [
                   { type: 'string', name: 'label', label: 'Label' },
-                  { type: 'string', name: 'href', label: 'Link' },
+                  { type: 'string', name: 'href', label: 'Link', searchable: false },
                   { type: 'boolean', name: 'outline', label: 'Outline style' },
                 ],
               },
@@ -239,19 +253,19 @@ export default defineConfig({
             ui: { itemProps: (item: any) => ({ label: item?.label || 'Item' }) },
             fields: [
               { type: 'string', name: 'label', label: 'Label' },
-              { type: 'string', name: 'href', label: 'Link' },
+              { type: 'string', name: 'href', label: 'Link', searchable: false },
               {
                 type: 'object', name: 'children', label: 'Dropdown items', list: true,
                 ui: { itemProps: (item: any) => ({ label: item?.label || 'Item' }) },
                 fields: [
                   { type: 'string', name: 'label', label: 'Label' },
-                  { type: 'string', name: 'href', label: 'Link' },
+                  { type: 'string', name: 'href', label: 'Link', searchable: false },
                   {
                     type: 'object', name: 'children', label: 'Flyout items', list: true,
                     ui: { itemProps: (item: any) => ({ label: item?.label || 'Item' }) },
                     fields: [
                       { type: 'string', name: 'label', label: 'Label' },
-                      { type: 'string', name: 'href', label: 'Link' },
+                      { type: 'string', name: 'href', label: 'Link', searchable: false },
                     ],
                   },
                 ],
@@ -276,7 +290,7 @@ export default defineConfig({
                     ui: { itemProps: (item: any) => ({ label: item?.label || 'Link' }) },
                     fields: [
                       { type: 'string', name: 'label', label: 'Label' },
-                      { type: 'string', name: 'href', label: 'Link' },
+                      { type: 'string', name: 'href', label: 'Link', searchable: false },
                     ],
                   },
                 ],
