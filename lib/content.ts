@@ -107,6 +107,15 @@ export const HOME_QUERY = `
     home(relativePath: $relativePath) {
       hero { eyebrow title text image buttons { label href outline } }
       welcome { arabic quote cite body }
+      sections {
+        programsTitle
+        programsSubtitle
+        cardLinkLabel
+        impactTitle
+        storiesTitle
+        storiesSubtitle
+        storiesButtonLabel
+      }
       programs { title text href icon }
       impact { number label }
       feature { eyebrow title text image buttonLabel buttonHref }

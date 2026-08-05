@@ -258,5 +258,51 @@
         ]
       }
     ]
+  },
+  "storiesPage": {
+    "eyebrow": "Zahra Hasanaat",
+    "title": "Stories",
+    "subtitle": "Real stories of lives changed through compassion and service.",
+    "allFilterLabel": "All",
+    "emptyText": "No stories in this theme yet."
+  },
+  "sitemapPage": {
+    "eyebrow": "Everything in one place",
+    "title": "Site Index",
+    "subtitle": "Every page and story on this site.",
+    "storiesHeading": "All Stories"
+  },
+  "labels": {
+    "backToStories": "All Stories",
+    "relatedDefault": "Explore further",
+    "footerContactTitle": "Connect"
+  },
+  "notFoundPage": {
+    "eyebrow": "Zahra Hasanaat",
+    "title": "Page not found",
+    "subtitle": "That page may have been moved or retired. These may be what you are looking for.",
+    "linksHeading": "Try one of these",
+    "links": [
+      {
+        "label": "Home",
+        "href": "index.html"
+      },
+      {
+        "label": "Our Programs",
+        "href": "education.html"
+      },
+      {
+        "label": "Stories",
+        "href": "stories.html"
+      },
+      {
+        "label": "Connect With Us",
+        "href": "connect.html"
+      },
+      {
+        "label": "Site Index",
+        "href": "sitemap.html"
+      }
+    ]
   }
 }

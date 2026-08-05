@@ -36,6 +36,7 @@ export default function ContentPage(props: Props) {
   });
   const doc = props.kind === 'page' ? data.page : data.story;
   const site = props.site;
+  const labels = site.labels || {};
 
   return (
     <>
@@ -54,7 +55,7 @@ export default function ContentPage(props: Props) {
             <article className="page-content reveal">
               {props.kind === 'story' && (
                 <p className="story-back">
-                  <a href="stories.html">&larr; All Stories</a>
+                  <a href="stories.html">&larr; {labels.backToStories}</a>
                 </p>
               )}
               <RichBody content={doc.body} />
@@ -73,7 +74,9 @@ export default function ContentPage(props: Props) {
                 (section: any, si: number) =>
                   section?.links?.length > 0 && (
                     <div className="related" key={si}>
-                      <h3 className="related-title">{section.title || 'Explore further'}</h3>
+                      <h3 className="related-title">
+                        {section.title || labels.relatedDefault}
+                      </h3>
                       <div className="related-links">
                         {section.links.map((r: any, i: number) => (
                           <a href={r.href} key={i}>

@@ -25,23 +25,20 @@ export default function StoriesIndex({
   stories: StoryMeta[];
   themes: string[];
 }) {
+  const sp = site.storiesPage || {};
   return (
     <>
       <Head>
-        <title>{`Stories — ${site.siteTitle}`}</title>
+        <title>{`${sp.title} — ${site.siteTitle}`}</title>
       </Head>
       <Layout site={site}>
-        <PageHero
-          eyebrow="Zahra Hasanaat"
-          title="Stories"
-          subtitle="Real stories of lives changed through compassion and service."
-        />
+        <PageHero eyebrow={sp.eyebrow} title={sp.title} subtitle={sp.subtitle} />
         <main className="page-main">
           <div className="container">
             <div className="stories-filter" id="storyFilter">
               <div className="filter-chips">
                 <button className="filter-chip active" data-filter="all">
-                  All
+                  {sp.allFilterLabel}
                 </button>
                 {themes.map((t) => (
                   <button className="filter-chip" data-filter={t} key={t}>
@@ -84,7 +81,7 @@ export default function StoriesIndex({
               ))}
             </div>
             <p className="stories-empty" id="storiesEmpty" hidden>
-              No stories in this theme yet.
+              {sp.emptyText}
             </p>
           </div>
         </main>

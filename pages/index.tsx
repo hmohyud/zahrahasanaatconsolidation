@@ -58,6 +58,7 @@ export default function HomePage(props: {
 }) {
   const { data } = useTina({ query: props.query, variables: props.variables, data: props.data });
   const home = data.home;
+  const sec = home.sections || {};
   const site = props.site;
 
   return (
@@ -110,8 +111,8 @@ export default function HomePage(props: {
         <section className="section section-alt" id="programs">
           <div className="container">
             <div className="section-header reveal">
-              <h2 className="section-title">Our Programs</h2>
-              <p className="section-subtitle">Serving communities through six pillars of impact.</p>
+              <h2 className="section-title">{sec.programsTitle}</h2>
+              <p className="section-subtitle">{sec.programsSubtitle}</p>
             </div>
             <div className="card-grid">
               {home.programs?.map((p: any, i: number) => (
@@ -119,7 +120,7 @@ export default function HomePage(props: {
                   <div className="card-icon">{ICONS[p.icon] || ICONS.book}</div>
                   <h4>{p.title}</h4>
                   <p>{p.text}</p>
-                  <span className="card-link">Learn more &rarr;</span>
+                  <span className="card-link">{sec.cardLinkLabel} &rarr;</span>
                 </a>
               ))}
             </div>
@@ -131,7 +132,7 @@ export default function HomePage(props: {
           <div className="container">
             <div className="section-header reveal">
               <h2 className="section-title" style={{ color: 'white' }}>
-                Our Impact
+                {sec.impactTitle}
               </h2>
             </div>
             <div className="impact-grid reveal">
@@ -140,7 +141,7 @@ export default function HomePage(props: {
                 return (
                   <div className="impact-item" key={i}>
                     <h3 data-count={n} data-suffix={suffix}>
-                      0
+                      {s.number}
                     </h3>
                     <p>{s.label}</p>
                   </div>
@@ -169,10 +170,8 @@ export default function HomePage(props: {
         <section className="section section-alt">
           <div className="container">
             <div className="section-header reveal">
-              <h2 className="section-title">Latest Stories</h2>
-              <p className="section-subtitle">
-                Real stories of lives changed through compassion and service.
-              </p>
+              <h2 className="section-title">{sec.storiesTitle}</h2>
+              <p className="section-subtitle">{sec.storiesSubtitle}</p>
             </div>
             <div className="story-grid">
               {props.featured.map((s) => (
@@ -191,7 +190,7 @@ export default function HomePage(props: {
             </div>
             <div className="stories-cta reveal">
               <a href="stories.html" className="btn btn-outline-primary">
-                View All Stories
+                {sec.storiesButtonLabel}
               </a>
             </div>
           </div>

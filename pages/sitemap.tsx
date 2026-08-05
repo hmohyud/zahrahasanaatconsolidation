@@ -18,17 +18,14 @@ export default function Sitemap({
   columns: Col[];
   stories: { label: string; href: string }[];
 }) {
+  const mp = site.sitemapPage || {};
   return (
     <>
       <Head>
-        <title>{`Site Index — ${site.siteTitle}`}</title>
+        <title>{`${mp.title} — ${site.siteTitle}`}</title>
       </Head>
       <Layout site={site}>
-        <PageHero
-          eyebrow="Everything in one place"
-          title="Site Index"
-          subtitle="Every page and story on this site."
-        />
+        <PageHero eyebrow={mp.eyebrow} title={mp.title} subtitle={mp.subtitle} />
         <main className="page-main">
           <div className="container">
             <div className="sitemap-grid">
@@ -45,7 +42,9 @@ export default function Sitemap({
                 </div>
               ))}
               <div className="sitemap-col sitemap-col--wide">
-                <h3>All Stories ({stories.length})</h3>
+                <h3>
+                  {mp.storiesHeading} ({stories.length})
+                </h3>
                 <ul>
                   {stories.map((s, i) => (
                     <li key={i}>

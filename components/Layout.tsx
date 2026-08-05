@@ -16,6 +16,32 @@ export type SiteSettings = {
     copyright: string;
     columns: { title: string; links: { label: string; href: string }[] }[];
   };
+  /* Editable copy for the generated pages and shared UI labels. */
+  storiesPage?: {
+    eyebrow?: string;
+    title?: string;
+    subtitle?: string;
+    allFilterLabel?: string;
+    emptyText?: string;
+  };
+  sitemapPage?: {
+    eyebrow?: string;
+    title?: string;
+    subtitle?: string;
+    storiesHeading?: string;
+  };
+  labels?: {
+    backToStories?: string;
+    relatedDefault?: string;
+    footerContactTitle?: string;
+  };
+  notFoundPage?: {
+    eyebrow?: string;
+    title?: string;
+    subtitle?: string;
+    linksHeading?: string;
+    links?: { label: string; href: string }[];
+  };
 };
 
 const isExternal = (href?: string) => /^https?:\/\//.test(href || '');
@@ -114,7 +140,7 @@ export function Footer({ site }: { site: SiteSettings }) {
             </div>
           ))}
           <div>
-            <h3>Connect</h3>
+            <h3>{site.labels?.footerContactTitle || 'Connect'}</h3>
             <p>
               <a href={`mailto:${f.contactEmail}`}>{f.contactEmail}</a>
             </p>

@@ -5,8 +5,16 @@
     "text": "Founded on the vision of Syedna Khuzaima Qutbuddin RA, Zahra Hasanaat uplifts communities through education, healthcare, financial inclusion, interfaith dialogue, and compassionate service.",
     "image": "/assets/uploads/mazaar/2022/04/roza-sunset-scaled.jpg",
     "buttons": [
-      { "label": "Explore Our Programs", "href": "#programs", "outline": false },
-      { "label": "Support Our Work", "href": "contribute.html", "outline": true }
+      {
+        "label": "Explore Our Programs",
+        "href": "#programs",
+        "outline": false
+      },
+      {
+        "label": "Support Our Work",
+        "href": "contribute.html",
+        "outline": true
+      }
     ]
   },
   "welcome": {
@@ -54,10 +62,22 @@
     }
   ],
   "impact": [
-    { "number": "296+", "label": "Scholarships Awarded" },
-    { "number": "45%", "label": "Women & Girls" },
-    { "number": "6", "label": "Program Pillars" },
-    { "number": "25+", "label": "Years of Service" }
+    {
+      "number": "296+",
+      "label": "Scholarships Awarded"
+    },
+    {
+      "number": "45%",
+      "label": "Women & Girls"
+    },
+    {
+      "number": "6",
+      "label": "Program Pillars"
+    },
+    {
+      "number": "25+",
+      "label": "Years of Service"
+    }
   ],
   "featuredStories": [
     "story-dental-camp-at-welfare-center",
@@ -76,8 +96,25 @@
     "title": "Make a Difference Today",
     "text": "Whether through a donation, volunteering your time, or applying for support — every action creates ripples of positive change.",
     "buttons": [
-      { "label": "Contribute", "href": "contribute.html", "outline": false },
-      { "label": "Get Involved", "href": "get-involved.html", "outline": true }
+      {
+        "label": "Contribute",
+        "href": "contribute.html",
+        "outline": false
+      },
+      {
+        "label": "Get Involved",
+        "href": "get-involved.html",
+        "outline": true
+      }
     ]
+  },
+  "sections": {
+    "programsTitle": "Our Programs",
+    "programsSubtitle": "Serving communities through six pillars of impact.",
+    "cardLinkLabel": "Learn more",
+    "impactTitle": "Our Impact",
+    "storiesTitle": "Latest Stories",
+    "storiesSubtitle": "Real stories of lives changed through compassion and service.",
+    "storiesButtonLabel": "View All Stories"
   }
 }

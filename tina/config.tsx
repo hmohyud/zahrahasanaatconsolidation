@@ -170,6 +170,20 @@ export default defineConfig({
           },
           {
             type: 'object',
+            name: 'sections',
+            label: 'Section headings',
+            fields: [
+              { type: 'string', name: 'programsTitle', label: 'Programs — heading' },
+              { type: 'string', name: 'programsSubtitle', label: 'Programs — subtitle' },
+              { type: 'string', name: 'cardLinkLabel', label: 'Program card link text' },
+              { type: 'string', name: 'impactTitle', label: 'Impact — heading' },
+              { type: 'string', name: 'storiesTitle', label: 'Latest stories — heading' },
+              { type: 'string', name: 'storiesSubtitle', label: 'Latest stories — subtitle' },
+              { type: 'string', name: 'storiesButtonLabel', label: 'Latest stories — button text' },
+            ],
+          },
+          {
+            type: 'object',
             name: 'programs',
             label: 'Program cards',
             list: true,
@@ -245,6 +259,61 @@ export default defineConfig({
         ui: { allowedActions: { create: false, delete: false } },
         fields: [
           { type: 'string', name: 'siteTitle', label: 'Site title' },
+          {
+            type: 'object',
+            name: 'storiesPage',
+            label: 'Stories index page',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
+              { type: 'string', name: 'title', label: 'Title' },
+              { type: 'string', name: 'subtitle', label: 'Subtitle', ui: { component: 'textarea' } },
+              { type: 'string', name: 'allFilterLabel', label: 'Label for the "all themes" filter chip' },
+              { type: 'string', name: 'emptyText', label: 'Message when a theme has no stories' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'sitemapPage',
+            label: 'Site index page',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
+              { type: 'string', name: 'title', label: 'Title' },
+              { type: 'string', name: 'subtitle', label: 'Subtitle', ui: { component: 'textarea' } },
+              { type: 'string', name: 'storiesHeading', label: 'Heading above the story list' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'notFoundPage',
+            label: 'Page not found (404)',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
+              { type: 'string', name: 'title', label: 'Title' },
+              { type: 'string', name: 'subtitle', label: 'Subtitle', ui: { component: 'textarea' } },
+              { type: 'string', name: 'linksHeading', label: 'Heading above the suggested links' },
+              {
+                type: 'object',
+                name: 'links',
+                label: 'Suggested links',
+                list: true,
+                ui: { itemProps: (item: any) => ({ label: item?.label || 'Link' }) },
+                fields: [
+                  { type: 'string', name: 'label', label: 'Label' },
+                  { type: 'string', name: 'href', label: 'Link', searchable: false },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'labels',
+            label: 'Shared labels',
+            fields: [
+              { type: 'string', name: 'backToStories', label: 'Back-link on a story page' },
+              { type: 'string', name: 'relatedDefault', label: 'Default heading for related links' },
+              { type: 'string', name: 'footerContactTitle', label: 'Footer contact column heading' },
+            ],
+          },
           {
             type: 'object',
             name: 'nav',
