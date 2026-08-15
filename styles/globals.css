@@ -2121,3 +2121,16 @@ nav a:hover .ext-icon { opacity: 1; }
 .card--static:hover { border-color: var(--color-border); background: var(--color-surface); }
 .card--static:hover::before { transform: scaleX(0); }
 .why-grid { margin-top: 2.5rem; text-align: left; }
+
+/* Four differentiators sit as a 2x2, not 3+1 with an orphan */
+@media (min-width: 640px) {
+  .card-grid.why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Give the title's diamond ornament clearance from the subtitle */
+.section-header .section-title { margin-bottom: 1.6rem; }
+
+/* A lone card on the final row of a 3-column grid sits centred */
+@media (min-width: 1024px) {
+  .card-grid > .card:last-child:nth-child(3n + 1) { grid-column: 2; }
+}
