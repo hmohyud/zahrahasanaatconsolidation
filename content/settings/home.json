@@ -2,8 +2,8 @@
   "hero": {
     "eyebrow": "Zahra Hasanaat",
     "title": "Service. Education.\nHarmony.",
-    "text": "Founded on the vision of Syedna Khuzaima Qutbuddin RA, Zahra Hasanaat uplifts communities through education, healthcare, financial inclusion, interfaith dialogue, and compassionate service.",
-    "image": "/assets/uploads/mazaar/2022/04/roza-sunset-scaled.jpg",
+    "text": "Community centres where families meet today's needs with dignity — and build the skills, relationships and confidence for lasting change.",
+    "image": "/assets/uploads/zh/2023/04/MG_0268-1024x683.jpg",
     "buttons": [
       {
         "label": "Explore Our Programs",
@@ -17,48 +17,48 @@
       }
     ]
   },
-  "welcome": {
-    "arabic": "الخلق عيال الله، واحب الخلق الى الله انفعهم لعياله",
-    "quote": "“All of creation are the children of God, and the most beloved to God of those children is the one who benefits His children the most.”",
-    "cite": "— Rasulullah SA",
-    "body": "Established in 1996, Zahra Hasanaat helps individuals and families realise their aspirations in health, education, and finance — guided by the belief that upliftment, not charity, benefits both the giver and the receiver and builds a society rooted in dignity, harmony, and compassion."
-  },
   "programs": [
     {
-      "title": "Education",
-      "text": "The Qutbi Jubilee Scholarship Program supports students from primary school through higher education with scholarships, mentorship, and career guidance.",
-      "href": "education.html",
-      "icon": "book"
+      "title": "Nutrition & Ration",
+      "text": "Daily cooked meals and household ration support, designed around dignity: simple enrolment, scheduled collection instead of queues, home delivery for those who cannot travel, and a community of volunteers behind every basket.",
+      "href": "food.html",
+      "icon": "leaf"
     },
     {
-      "title": "Interfaith",
-      "text": "Taqreeb fosters inter- and intra-faith understanding through academic conferences, grassroots community service, and dialogue.",
-      "href": "interfaith.html",
-      "icon": "globe"
-    },
-    {
-      "title": "Health",
-      "text": "Medical camps, mental health awareness, dental care, eye care, insurance guidance, and wellness webinars for underserved communities.",
+      "title": "Medical",
+      "text": "Specialist medical camps, mother and child health services, outpatient care and telemedicine for families in rural and semi-urban India — with structured follow-up so that a first consultation becomes lasting care.",
       "href": "health.html",
       "icon": "heart"
     },
     {
-      "title": "Financial Advisory",
-      "text": "Financial literacy, livelihood support, small business loans, and advisory services to help families achieve economic stability.",
+      "title": "Education",
+      "text": "A community library, child-centred English classes, creative workshops, vocational training for women and computer literacy — safe, joyful learning spaces where children and adults build language, skills and confidence.",
+      "href": "education.html",
+      "icon": "book"
+    },
+    {
+      "title": "Grants & Livelihoods",
+      "text": "Needs-assessed grants and interest-free loans for medical costs, school fees and household essentials, backed by dedicated case workers who stay with each family on the path from crisis to stability to self-reliance.",
       "href": "financial.html",
       "icon": "coin"
     },
     {
-      "title": "Food Security",
-      "text": "Food distribution programs ensuring no family goes hungry, guided by the Qur’anic principle of feeding and clothing those in need.",
-      "href": "food.html",
-      "icon": "shield"
+      "title": "Wellness",
+      "text": "Our wellness programmes help people build healthier habits through education, movement, nutrition and reflection. AMAN, our flagship cohort programme, is joined by art circles, Hapkido self-defence classes and a community art space.",
+      "href": "wellness.html",
+      "icon": "sun"
     },
     {
-      "title": "Mazaar-e-Qutbi",
-      "text": "Raudat-un-Noor — the mausoleum of Syedna Khuzaima Qutbuddin RA in Thane, Maharashtra. A place of peace, reflection, and community welfare.",
-      "href": "mazaar.html",
-      "icon": "home"
+      "title": "Community Outreach",
+      "text": "Trust comes before services. Through monthly neighbourhood visits built around art and listening, home visits, counsellor-led family follow-up and trained volunteers, we build the long-term relationships that connect families to lasting support.",
+      "href": "outreach.html",
+      "icon": "users"
+    },
+    {
+      "title": "Humrahe Khair",
+      "text": "Humrahe Khair, meaning Together for Good, brings communities together through dialogue gatherings, collaborative service projects and shared resource mapping, turning conversation into practical cooperation across organisations in India and the USA.",
+      "href": "hek.html",
+      "icon": "hands"
     }
   ],
   "impact": [
@@ -85,12 +85,12 @@
     "story-community-conversations-livelihood-series"
   ],
   "feature": {
-    "eyebrow": "Mazaar-e-Qutbi",
-    "title": "Raudat-un-Noor",
-    "text": "The mausoleum of the 53rd Dai al-Mutlaq, Syedna Khuzaima Qutbuddin RA, in Thane, Maharashtra — “an embodiment of knowledge and light.” A place of peace and reflection, home to a social welfare centre serving the surrounding community.",
-    "image": "/assets/uploads/mazaar/2022/11/syedna-putting-sandal-qabar-scaled.jpg",
-    "buttonLabel": "Visit Raudat-un-Noor",
-    "buttonHref": "mazaar.html"
+    "eyebrow": "On the ground",
+    "title": "Community Outreach",
+    "text": "Outreach is the connective tissue of our work: basti visits, counsellors and trained volunteers who build trust street by street, understand what each family actually needs, and link them to sustained support across our programs.",
+    "image": "/assets/uploads/zh/2023/04/MG_9972-1024x683.jpg",
+    "buttonLabel": "How outreach works",
+    "buttonHref": "outreach.html"
   },
   "cta": {
     "title": "Make a Difference Today",
@@ -110,11 +110,33 @@
   },
   "sections": {
     "programsTitle": "Our Programs",
-    "programsSubtitle": "Serving communities through six pillars of impact.",
+    "programsSubtitle": "Seven connected verticals, one system of upliftment.",
     "cardLinkLabel": "Learn more",
     "impactTitle": "Our Impact",
     "storiesTitle": "Latest Stories",
     "storiesSubtitle": "Real stories of lives changed through compassion and service.",
     "storiesButtonLabel": "View All Stories"
+  },
+  "why": {
+    "heading": "Intergenerational poverty is not solved by isolated acts of charity. It takes long-term, relationship-centred work.",
+    "intro": "Intergenerational poverty is rarely broken by a single act of help. Families facing hunger, educational inequity, poor health access and fragile livelihoods need more than isolated interventions — they need trusted local places that combine support, participation and continuity over the long term. We believe in dignity and participation over transactional charity: meeting today's needs in ways that build tomorrow's capability.",
+    "differentiators": [
+      {
+        "heading": "A hub, not a distribution point",
+        "text": "Each centre is a welcoming local space where people access services, build relationships and gain skills — shaped by its own neighbourhood, and part of a network that shares one mission of dignity and capability."
+      },
+      {
+        "heading": "Connected support, not isolated projects",
+        "text": "Food, education, health, wellbeing and livelihood programmes are designed to reinforce one another. Someone who first comes for food support might join a skills class; a child in tuition might move into computer literacy — every doorway leads to another."
+      },
+      {
+        "heading": "Relationships as infrastructure",
+        "text": "Counsellors, outreach workers and volunteers are not peripheral extras — they are the human system through which trust and continuity are built, so that help arrives as a sustained relationship rather than a one-off transaction."
+      },
+      {
+        "heading": "From recipient to contributor",
+        "text": "The aim is not dependence but growth. People who arrive needing support are helped to become participants, then contributors — volunteers, mentors and local leaders who carry the work forward in their own communities."
+      }
+    ]
   }
 }

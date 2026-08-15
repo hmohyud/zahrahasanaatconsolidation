@@ -2038,3 +2038,86 @@ nav a:hover .ext-icon { opacity: 1; }
 @media (min-width: 620px) {
   .contact-row { grid-template-columns: 8rem 1fr; align-items: baseline; }
 }
+
+/* ========================================================================
+   SITE SEARCH — header icon + search page
+   ======================================================================== */
+.header-search {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  color: var(--color-foreground);
+  transition: color var(--transition);
+}
+.header-search:hover { color: var(--color-accent-deep); }
+.header-search svg { width: 18px; height: 18px; }
+@media (min-width: 1024px) {
+  .site-header .container { gap: 0.25rem; }
+  .header-search { order: 3; margin-left: 0.25rem; }
+}
+@media (max-width: 1023px) {
+  .header-search { margin-left: auto; margin-right: 0.25rem; }
+}
+
+.search-box { margin: 0 0 2rem; }
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-accent);
+  background: var(--color-surface);
+  padding: 0.9rem 1.1rem;
+}
+.search-glyph { width: 20px; height: 20px; color: var(--color-accent-deep); flex-shrink: 0; }
+.search-input-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  color: var(--color-foreground);
+}
+.search-input-wrap input::placeholder { color: var(--color-muted); }
+
+.search-results { margin-top: 1.5rem; border-top: 1px solid var(--color-border); }
+.search-result {
+  display: block;
+  padding: 1.1rem 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-foreground);
+  text-decoration: none;
+  transition: background var(--transition);
+}
+.search-result:hover { background: var(--color-light-gray); }
+.search-result-kind {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent-deep);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.search-result-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.search-result-sub { display: block; font-size: 0.85rem; color: var(--color-muted); margin-top: 0.15rem; }
+.search-result-excerpt { display: block; font-size: 0.92rem; color: var(--color-muted); margin-top: 0.4rem; line-height: 1.55; }
+.search-empty { padding: 1.25rem 0; color: var(--color-muted); }
+
+/* Differentiator cards on the homepage are informational, not links */
+.card--static { cursor: default; }
+.card--static:hover { border-color: var(--color-border); background: var(--color-surface); }
+.card--static:hover::before { transform: scaleX(0); }
+.why-grid { margin-top: 2.5rem; text-align: left; }

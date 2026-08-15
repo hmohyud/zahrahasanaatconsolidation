@@ -6,7 +6,37 @@ import React from 'react';
 import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import { asset } from '../lib/url';
 
+
+/** Slug ids for headings so in-page anchors like #food work. */
+function textOfNode(node: any): string {
+  if (node == null) return '';
+  if (typeof node === 'string') return node;
+  if (Array.isArray(node)) return node.map(textOfNode).join('');
+  if (typeof node === 'object') {
+    // Tina AST text node
+    if (typeof node.text === 'string') return node.text;
+    // Tina AST element node
+    if (node.children) return textOfNode(node.children);
+    // rendered React element (Tina nests children under props.children or
+    // hands the raw AST to an inner renderer as props.content)
+    if (node.props) return textOfNode(node.props.children ?? node.props.content);
+  }
+  return '';
+}
+function slugId(children: any): string | undefined {
+  const t = textOfNode(children).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return t || undefined;
+}
+
+const heading = (Tag: any) => (props: any) => <Tag id={slugId(props?.children)}>{props?.children}</Tag>;
+
 const components = {
+  h1: heading('h1'),
+  h2: heading('h2'),
+  h3: heading('h3'),
+  h4: heading('h4'),
+  h5: heading('h5'),
+  h6: heading('h6'),
   MediaText: (props: any) => (
     <div className={`media-row${props?.mediaRight ? ' media-row--right' : ''}`}>
       {props?.image && (

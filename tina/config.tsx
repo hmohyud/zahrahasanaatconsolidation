@@ -159,13 +159,22 @@ export default defineConfig({
           },
           {
             type: 'object',
-            name: 'welcome',
-            label: 'Welcome passage',
+            name: 'why',
+            label: 'Why we exist',
             fields: [
-              { type: 'string', name: 'arabic', label: 'Arabic line' },
-              { type: 'string', name: 'quote', label: 'Quote (English)', ui: { component: 'textarea' } },
-              { type: 'string', name: 'cite', label: 'Attribution' },
-              { type: 'string', name: 'body', label: 'Paragraph', ui: { component: 'textarea' } },
+              { type: 'string', name: 'heading', label: 'Lead line', ui: { component: 'textarea' } },
+              { type: 'string', name: 'intro', label: 'Supporting paragraph', ui: { component: 'textarea' } },
+              {
+                type: 'object',
+                name: 'differentiators',
+                label: 'What sets us apart',
+                list: true,
+                ui: { itemProps: (item: any) => ({ label: item?.heading || 'Item' }) },
+                fields: [
+                  { type: 'string', name: 'heading', label: 'Heading' },
+                  { type: 'string', name: 'text', label: 'Text', ui: { component: 'textarea' } },
+                ],
+              },
             ],
           },
           {
@@ -194,7 +203,7 @@ export default defineConfig({
               { type: 'string', name: 'href', label: 'Link', searchable: false },
               {
                 type: 'string', name: 'icon', label: 'Icon',
-                options: ['book', 'globe', 'heart', 'coin', 'shield', 'home'],
+                options: ['book', 'globe', 'heart', 'coin', 'shield', 'home', 'leaf', 'users', 'sun', 'hands'],
               },
             ],
           },
@@ -280,6 +289,18 @@ export default defineConfig({
               { type: 'string', name: 'title', label: 'Title' },
               { type: 'string', name: 'subtitle', label: 'Subtitle', ui: { component: 'textarea' } },
               { type: 'string', name: 'storiesHeading', label: 'Heading above the story list' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'searchPage',
+            label: 'Search page',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Eyebrow' },
+              { type: 'string', name: 'title', label: 'Title' },
+              { type: 'string', name: 'subtitle', label: 'Subtitle', ui: { component: 'textarea' } },
+              { type: 'string', name: 'placeholder', label: 'Input placeholder' },
+              { type: 'string', name: 'noResults', label: 'No-results message' },
             ],
           },
           {

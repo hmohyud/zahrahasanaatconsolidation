@@ -106,7 +106,7 @@ export const HOME_QUERY = `
   query Home($relativePath: String!) {
     home(relativePath: $relativePath) {
       hero { eyebrow title text image buttons { label href outline } }
-      welcome { arabic quote cite body }
+      why { heading intro differentiators { heading text } }
       sections {
         programsTitle
         programsSubtitle

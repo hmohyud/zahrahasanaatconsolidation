@@ -35,6 +35,13 @@ export type SiteSettings = {
     relatedDefault?: string;
     footerContactTitle?: string;
   };
+  searchPage?: {
+    eyebrow?: string;
+    title?: string;
+    subtitle?: string;
+    placeholder?: string;
+    noResults?: string;
+  };
   notFoundPage?: {
     eyebrow?: string;
     title?: string;
@@ -103,6 +110,12 @@ export function Header({ site }: { site: SiteSettings }) {
         <div className="site-title">
           <a href="index.html">{site.siteTitle}</a>
         </div>
+        <a className="header-search" href="search.html" aria-label="Search the site">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.5-4.5" />
+          </svg>
+        </a>
         <button className="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span></span>
           <span></span>
