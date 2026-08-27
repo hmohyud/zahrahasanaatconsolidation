@@ -2134,3 +2134,46 @@ nav a:hover .ext-icon { opacity: 1; }
 @media (min-width: 1024px) {
   .card-grid > .card:last-child:nth-child(3n + 1) { grid-column: 2; }
 }
+
+/* ========================================================================
+   EMBEDDED PORTAL — the centralised application system, framed sharp
+   ======================================================================== */
+.portal-embed {
+  margin: 2rem 0;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.portal-embed-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-light-gray);
+}
+.portal-embed-bar span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-deep);
+}
+.portal-embed-bar a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+}
+.portal-embed-bar a:hover { color: var(--color-accent-deep); }
+.portal-embed iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  min-height: 900px;
+  height: 80vh;
+}
+@media (max-width: 560px) {
+  .portal-embed { margin-inline: -1.25rem; border-inline: none; }
+  .portal-embed iframe { min-height: 720px; height: 78vh; }
+}

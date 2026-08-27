@@ -35,7 +35,7 @@ const INTENTIONAL = new Map([
   ['qjsp-primary-education.html', 'grammar fixes, stale placeholder removed'],
   ['qjsp-harmony-prize.html', 'nominations section added, honorific framing reduced'],
   ['qjsp-about.html', 'grammar fix'],
-  ['apply.html', 'renamed sections, neutral framing, grammar fixes'],
+  ['apply.html', 'replaced by the centralised application portal (apply.zahrahasanaat.org embed)'],
   ['taqreeb-2016-conference.html', 'stale promise removed'],
   ['qjsp-contact.html', 'rebuilt as a structured contact card'],
   ['connect.html', 'rebuilt: contact card + consolidated buttons'],

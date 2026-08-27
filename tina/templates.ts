@@ -70,7 +70,18 @@ const contactCardTemplate: Template = {
   ],
 };
 
+const portalEmbedTemplate: Template = {
+  name: 'PortalEmbed',
+  label: 'Embedded Portal (full-page iframe)',
+  fields: [
+    { type: 'string', name: 'url', label: 'Portal URL' },
+    { type: 'string', name: 'title', label: 'Title (accessibility + fallback link text)' },
+    { type: 'number', name: 'minHeight', label: 'Minimum height in px (default 900)' },
+  ],
+};
+
 const leafTemplates: Template[] = [
+  portalEmbedTemplate,
   galleryTemplate,
   embedTemplate,
   videoFileTemplate,

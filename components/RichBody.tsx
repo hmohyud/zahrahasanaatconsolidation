@@ -59,6 +59,22 @@ const components = {
       <TinaMarkdown content={props?.children} components={components as any} />
     </div>
   ),
+  PortalEmbed: (props: any) => (
+    <div className="portal-embed">
+      <div className="portal-embed-bar">
+        <span>{props?.title || 'Application portal'}</span>
+        <a href={props?.url} target="_blank" rel="noopener noreferrer">
+          Open in a new tab &#8599;
+        </a>
+      </div>
+      <iframe
+        src={props?.url}
+        title={props?.title || 'Application portal'}
+        style={props?.minHeight ? { minHeight: props.minHeight } : undefined}
+        loading="lazy"
+      />
+    </div>
+  ),
   Embed: (props: any) => (
     <div
       className="video-embed"
