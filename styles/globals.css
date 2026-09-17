@@ -2177,3 +2177,129 @@ nav a:hover .ext-icon { opacity: 1; }
   .portal-embed { margin-inline: -1.25rem; border-inline: none; }
   .portal-embed iframe { min-height: 720px; height: 78vh; }
 }
+
+/* ========================================================================
+   CAROUSEL — sliding gallery. Native scroll-snap does the sliding, so it
+   swipes on touch and still works if JavaScript never loads; the arrows and
+   dots are progressive enhancement wired up in site.js.
+   ======================================================================== */
+.carousel {
+  position: relative;
+  margin: 2.25rem 0;
+}
+.carousel-track {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border);
+  background: var(--color-dark);
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.carousel .carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  margin: 0;
+  position: relative;
+  background: var(--color-dark);
+}
+.carousel .carousel-slide img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border: none;
+  padding: 0;
+  background: var(--color-dark);
+}
+.carousel .carousel-slide figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2.5rem 1.25rem 0.9rem;
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #fff;
+  background: linear-gradient(to top, rgba(10, 22, 40, 0.82), rgba(10, 22, 40, 0));
+  margin: 0;
+}
+
+/* arrows — square plates, consistent with the rest of the site */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(10, 22, 40, 0.55);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background var(--transition), border-color var(--transition), opacity var(--transition);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.carousel-nav:hover { background: rgba(10, 22, 40, 0.8); border-color: #fff; }
+.carousel-nav svg { width: 20px; height: 20px; }
+.carousel-prev { left: 0.75rem; }
+.carousel-next { right: 0.75rem; }
+.carousel-nav[disabled] { opacity: 0.25; cursor: default; }
+
+/* dots */
+.carousel-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+}
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0;
+  transform: rotate(45deg);
+  transition: background var(--transition), border-color var(--transition);
+}
+.carousel-dot.active { background: var(--color-accent); border-color: var(--color-accent); }
+
+@media (max-width: 560px) {
+  .carousel { margin-inline: -1.25rem; }
+  .carousel-track { border-inline: none; }
+  .carousel-nav { width: 38px; height: 38px; }
+  .carousel-prev { left: 0.35rem; }
+  .carousel-next { right: 0.35rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track { scroll-behavior: auto; }
+}
+
+/* Quote cards are square graphics — show them whole, not cropped */
+.carousel.carousel--quotes .carousel-slide img { aspect-ratio: 1 / 1; object-fit: contain; }
+@media (min-width: 720px) {
+  .carousel.carousel--quotes .carousel-slide { flex-basis: 50%; }
+}
+
+/* Quote cards already carry their text and attribution as artwork — the
+   caption stays in alt text for screen readers but isn't drawn over them. */
+.carousel.carousel--quotes .carousel-slide figcaption { display: none; }
+.carousel.carousel--quotes .carousel-track { background: var(--color-light-gray); }
+.carousel.carousel--quotes .carousel-slide { background: var(--color-light-gray); }
+.carousel.carousel--quotes .carousel-slide img { background: var(--color-light-gray); }

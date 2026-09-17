@@ -220,7 +220,7 @@
 
   /* ---------- image lightbox ---------- */
   var lbImgs = [].slice.call(document.querySelectorAll('.page-content img, .feature-media img'))
-    .filter(function (img) { return !img.closest('a'); });
+    .filter(function (img) { return !img.closest('a') && !img.closest('.carousel'); });
   if (lbImgs.length) {
     var lb = document.createElement('div');
     lb.className = 'lightbox';

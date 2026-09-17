@@ -13,6 +13,7 @@ const leafTemplates = [
     { name: 'VideoFile', fields: [
       { type: 'string', name: 'src' }, { type: 'image', name: 'poster' } ] },
     { name: 'ButtonRow', fields: [ { type: 'rich-text', name: 'children' } ] },
+    { name: 'Carousel', fields: [ { type: 'string', name: 'variant' }, { type: 'rich-text', name: 'children' } ] },
     { name: 'PortalEmbed', fields: [
       { type: 'string', name: 'url' }, { type: 'string', name: 'title' },
       { type: 'number', name: 'minHeight' } ] },

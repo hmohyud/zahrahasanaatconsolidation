@@ -70,6 +70,27 @@ const contactCardTemplate: Template = {
   ],
 };
 
+const carouselTemplate: Template = {
+  name: 'Carousel',
+  label: 'Sliding Gallery (carousel)',
+  fields: [
+    {
+      type: 'string',
+      name: 'variant',
+      label: 'Style',
+      options: [
+        { value: 'photos', label: 'Photos (wide, filled)' },
+        { value: 'quotes', label: 'Square cards (shown whole)' },
+      ],
+    },
+    {
+      type: 'rich-text',
+      name: 'children',
+      label: 'Slides — add one image per line; its alt text becomes the caption',
+    },
+  ],
+};
+
 const portalEmbedTemplate: Template = {
   name: 'PortalEmbed',
   label: 'Embedded Portal (full-page iframe)',
@@ -81,6 +102,7 @@ const portalEmbedTemplate: Template = {
 };
 
 const leafTemplates: Template[] = [
+  carouselTemplate,
   portalEmbedTemplate,
   galleryTemplate,
   embedTemplate,

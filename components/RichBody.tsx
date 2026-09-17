@@ -2,7 +2,7 @@
  * Renders a Tina rich-text body inside .page-content, mapping the custom
  * block templates (tina/templates.ts) to the site's museum-styled markup.
  */
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text';
 import { asset } from '../lib/url';
 
@@ -28,7 +28,132 @@ function slugId(children: any): string | undefined {
   return t || undefined;
 }
 
+/** Every image node inside a rich-text subtree, in document order. */
+function collectImages(node: any, out: any[] = []): any[] {
+  if (!node || typeof node !== 'object') return out;
+  if (Array.isArray(node)) {
+    node.forEach((n) => collectImages(n, out));
+    return out;
+  }
+  if (node.type === 'img' && node.url) out.push({ url: node.url, alt: node.alt || '' });
+  if (node.children) collectImages(node.children, out);
+  return out;
+}
+
 const heading = (Tag: any) => (props: any) => <Tag id={slugId(props?.children)}>{props?.children}</Tag>;
+
+
+/**
+ * Sliding gallery. The track is a native scroll-snap container (so touch
+ * swiping and no-JS both work); React adds arrows, dots and keyboard control.
+ */
+function CarouselBlock({ slides, variant }: { slides: any[]; variant?: string }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const sync = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const slide = el.querySelector('.carousel-slide') as HTMLElement | null;
+    const w = slide?.getBoundingClientRect().width || 1;
+    setIndex(Math.round(el.scrollLeft / w));
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft >= el.scrollWidth - el.clientWidth - 2);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        sync();
+      });
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+    return () => {
+      el.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', sync);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [sync]);
+
+  const goTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const slide = el.querySelector('.carousel-slide') as HTMLElement | null;
+    const w = slide?.getBoundingClientRect().width || 1;
+    const target = Math.max(0, Math.min(i, slides.length - 1));
+    el.scrollTo({ left: target * w, behavior: 'smooth' });
+  };
+
+  return (
+    <div className={`carousel${variant === 'quotes' ? ' carousel--quotes' : ''}`}>
+      <div
+        className="carousel-track"
+        ref={trackRef}
+        tabIndex={0}
+        aria-label="Image gallery"
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            goTo(index + 1);
+          }
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            goTo(index - 1);
+          }
+        }}
+      >
+        {slides.map((s: any, i: number) => (
+          <figure className="carousel-slide" key={i}>
+            <img src={asset(s.url)} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+            {s.alt && <figcaption>{s.alt}</figcaption>}
+          </figure>
+        ))}
+      </div>
+      <button
+        className="carousel-nav carousel-prev"
+        type="button"
+        aria-label="Previous image"
+        disabled={atStart}
+        onClick={() => goTo(index - 1)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
+          <path d="M15 5L8 12l7 7" />
+        </svg>
+      </button>
+      <button
+        className="carousel-nav carousel-next"
+        type="button"
+        aria-label="Next image"
+        disabled={atEnd}
+        onClick={() => goTo(index + 1)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
+          <path d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      <div className="carousel-dots">
+        {slides.map((_: any, i: number) => (
+          <button
+            key={i}
+            type="button"
+            className={`carousel-dot${i === index ? ' active' : ''}`}
+            aria-label={`Go to image ${i + 1}`}
+            onClick={() => goTo(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const components = {
   h1: heading('h1'),
@@ -59,6 +184,11 @@ const components = {
       <TinaMarkdown content={props?.children} components={components as any} />
     </div>
   ),
+  Carousel: (props: any) => {
+    const slides = collectImages(props?.children);
+    if (!slides.length) return null;
+    return <CarouselBlock slides={slides} variant={props?.variant} />;
+  },
   PortalEmbed: (props: any) => (
     <div className="portal-embed">
       <div className="portal-embed-bar">
