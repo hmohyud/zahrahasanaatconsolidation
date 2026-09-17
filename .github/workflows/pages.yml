@@ -47,7 +47,11 @@ jobs:
         run: |
           if [ -n "$NEXT_PUBLIC_TINA_CLIENT_ID" ] && [ -n "$TINA_TOKEN" ]; then
             echo "Tina Cloud credentials found — building /admin"
-            npx tinacms build
+            # --skip-cloud-checks: TinaCloud re-indexes the schema asynchronously
+            # after a push, so without this the site build fails whenever the
+            # schema changed in the same commit. Page content is read from the
+            # filesystem at build time, so the published site is unaffected.
+            npx tinacms build --skip-cloud-checks
           else
             echo "No Tina Cloud credentials — building site without /admin"
           fi
