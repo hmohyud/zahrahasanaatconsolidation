@@ -4,7 +4,7 @@
 :root {
   /* Warm "museum" palette: ivory ground, ink text, restrained green/gold accents */
   --color-foreground: #23201A;        /* warm ink */
-  --color-background: #FBF8F1;         /* ivory */
+  --color-background: #F7F0E2;         /* warm ivory */
   --color-surface: #FFFFFF;           /* cards/panels sit a touch brighter than the ground */
   --color-primary: #0C6F5B;           /* deep museum green (>=4.5:1 as text on light bands) */
   --color-primary-dark: #0a5f4e;
@@ -14,7 +14,7 @@
   --color-accent-deep: #8a6a16;       /* readable gold for text on light backgrounds (>=4.5:1) */
   --color-accent-light: #f3ead6;
   --color-muted: #6f6555;             /* warm muted */
-  --color-light-gray: #F3ECDE;        /* warm sand for alternating sections */
+  --color-light-gray: #EFE5D1;        /* warm sand for alternating sections */
   --color-border: #E4DBC9;            /* warm hairline */
   --color-dark: #1c2a24;              /* deep evergreen-ink for dark sections/footer */
   --color-dark-lighter: #24352d;
@@ -36,7 +36,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; scroll-padding-top: calc(var(--header-height) + 0.75rem); }
+html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: calc(var(--header-height) + 0.75rem); }
 :where(a, button, .card, .btn, .filter-chip, .story-card) { -webkit-tap-highlight-color: transparent; }
 [id] { scroll-margin-top: calc(var(--header-height) + 0.75rem); }
 
@@ -50,7 +50,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-kerning: normal;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body.nav-open { overflow: hidden; }
@@ -109,7 +109,10 @@ img { max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
-  background: rgba(255,255,255,0.92);
+  /* derived from the page ground so the nav can never drift from it;
+     a literal rgba() here gets minified to hsla() and rounds by 1/255 */
+  background: var(--color-background);
+  background: color-mix(in srgb, var(--color-background) 92%, transparent);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   z-index: 1000;
@@ -703,7 +706,7 @@ nav .subsubmenu a.active { font-weight: 600; }
   font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
 }
 .cta .btn-primary {
-  background: white;
+  background: var(--color-background);
   color: var(--color-primary);
   box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
@@ -881,7 +884,7 @@ nav .subsubmenu a.active { font-weight: 600; }
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    background: white;
+    background: var(--color-background);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-xl);
