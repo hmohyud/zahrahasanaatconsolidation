@@ -18,6 +18,7 @@ const INTENTIONAL = new Map([
   ['taqreeb-portfolio.html', 'deleted: WordPress demo portfolio ("Project Name")'],
   ['story-qjsp-scholarship-application.html', 'deleted: expired 2019 deadline, duplicated'],
   ['story-qjsp-about-homepage.html', 'merged into qjsp-about'],
+  ['story-mazaar-e-qutbi-guided-tours.html', 'deleted: promoted the de-linked Mazaar entity'],
   ['food.html', 'rebuilt from the 2026 Nutrition & Ration strategy document'],
   ['health.html', 'rebuilt from the 2026 Medical strategy document'],
   ['education.html', 'rebuilt from the 2026 Education strategy document'],
