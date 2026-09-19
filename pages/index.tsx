@@ -159,7 +159,7 @@ export default function HomePage(props: {
 
         {/* ---------- FILM ---------- */}
         {home.film?.src && (
-          <section className="section film-section" id="film">
+          <section className="section section-primary film-section" id="film">
             <div className="container">
               <div className="section-header reveal">
                 <h2 className="section-title">{home.film.title}</h2>
@@ -171,6 +171,7 @@ export default function HomePage(props: {
                   <source src={asset(home.film.src)} type="video/mp4" />
                 </video>
               </div>
+              {home.film.caption && <p className="film-caption reveal">{home.film.caption}</p>}
             </div>
           </section>
         )}

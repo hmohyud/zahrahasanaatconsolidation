@@ -168,6 +168,7 @@ export default defineConfig({
               { type: 'string', name: 'text', label: 'Intro text', ui: { component: 'textarea' } },
               { type: 'string', name: 'src', label: 'Video file (mp4)', searchable: false },
               { type: 'image', name: 'poster', label: 'Poster image', searchable: false },
+              { type: 'string', name: 'caption', label: 'Caption under the video (optional)' },
             ],
           },
           {

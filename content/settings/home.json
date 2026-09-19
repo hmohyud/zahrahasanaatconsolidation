@@ -21,9 +21,10 @@
   },
   "film": {
     "title": "See the work for yourself",
-    "text": "Four and a half minutes inside the centres, camps and classrooms — the programs, the people who run them, and the families they were built for.",
+    "text": "Inside the centres, camps and classrooms — the programs, the people who run them, and the families they were built for.",
     "src": "/assets/video/zh-film-web.mp4",
-    "poster": "/assets/video/zh-film-poster.webp"
+    "poster": "/assets/video/zh-film-poster.webp",
+    "caption": "4 minutes 27 seconds"
   },
   "programs": [
     {
