@@ -95,9 +95,27 @@ export default function HomePage(props: {
       <Layout site={site}>
         {/* ---------- HERO ---------- */}
         <section
-          className="hero hero--photo"
+          className={`hero hero--photo${home.hero.video ? ' hero--video' : ''}`}
           style={{ ['--hero-img' as any]: `url('${asset(home.hero.image)}')` }}
         >
+          {/* Silent cut of the introductory film. The still photo stays as the
+              poster and as the reduced-motion fallback, so the hero reads the
+              same when the video is blocked or never loads. */}
+          {home.hero.video && (
+            <video
+              className="hero-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={asset(home.hero.videoPoster || home.hero.image)}
+              aria-hidden="true"
+              tabIndex={-1}
+            >
+              <source src={asset(home.hero.video)} type="video/mp4" />
+            </video>
+          )}
           <div className="hero-bg"></div>
           <div className="hero-pattern"></div>
           <div className="hero-inner">
@@ -138,6 +156,24 @@ export default function HomePage(props: {
             </div>
           </div>
         </section>
+
+        {/* ---------- FILM ---------- */}
+        {home.film?.src && (
+          <section className="section film-section" id="film">
+            <div className="container">
+              <div className="section-header reveal">
+                <h2 className="section-title">{home.film.title}</h2>
+                {home.film.text && <p className="section-subtitle">{home.film.text}</p>}
+              </div>
+              {/* preload="none" so the film costs nothing until it is played */}
+              <div className="film-frame reveal">
+                <video controls playsInline preload="none" poster={asset(home.film.poster)}>
+                  <source src={asset(home.film.src)} type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ---------- PROGRAMS ---------- */}
         <section className="section section-alt" id="programs">

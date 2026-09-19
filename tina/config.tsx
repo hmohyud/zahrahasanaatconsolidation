@@ -146,6 +146,8 @@ export default defineConfig({
               { type: 'string', name: 'title', label: 'Headline', ui: { component: 'textarea' } },
               { type: 'string', name: 'text', label: 'Intro text', ui: { component: 'textarea' } },
               { type: 'image', name: 'image', label: 'Background photo', searchable: false },
+              { type: 'string', name: 'video', label: 'Background video (mp4) — optional', searchable: false },
+              { type: 'image', name: 'videoPoster', label: 'Video poster frame', searchable: false },
               {
                 type: 'object', name: 'buttons', label: 'Buttons', list: true,
                 ui: { itemProps: (item: any) => ({ label: item?.label || 'Button' }) },
@@ -155,6 +157,17 @@ export default defineConfig({
                   { type: 'boolean', name: 'outline', label: 'Outline style' },
                 ],
               },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'film',
+            label: 'Film section',
+            fields: [
+              { type: 'string', name: 'title', label: 'Heading' },
+              { type: 'string', name: 'text', label: 'Intro text', ui: { component: 'textarea' } },
+              { type: 'string', name: 'src', label: 'Video file (mp4)', searchable: false },
+              { type: 'image', name: 'poster', label: 'Poster image', searchable: false },
             ],
           },
           {

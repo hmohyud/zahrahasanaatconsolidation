@@ -2303,3 +2303,51 @@ nav a:hover .ext-icon { opacity: 1; }
 .carousel.carousel--quotes .carousel-track { background: var(--color-light-gray); }
 .carousel.carousel--quotes .carousel-slide { background: var(--color-light-gray); }
 .carousel.carousel--quotes .carousel-slide img { background: var(--color-light-gray); }
+
+/* ========== HERO: VIDEO BACKGROUND ========== */
+/* The video sits under .hero-bg, which supplies the darkening gradient that
+   keeps the headline readable. .hero--photo's image stays on .hero-bg as the
+   fallback for reduced motion and for browsers that refuse to autoplay. */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero--video .hero-bg {
+  background: linear-gradient(180deg, rgba(10, 22, 40, 0.58) 0%, rgba(13, 27, 42, 0.76) 55%, rgba(10, 22, 40, 0.88) 100%);
+  transform: none;
+  z-index: 1;
+}
+.hero--video .hero-pattern { z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--video .hero-video { display: none; }
+  .hero--video .hero-bg {
+    background:
+      linear-gradient(180deg, rgba(10, 22, 40, 0.55) 0%, rgba(13, 27, 42, 0.74) 55%, rgba(10, 22, 40, 0.86) 100%),
+      var(--hero-img) center / cover no-repeat;
+  }
+}
+
+/* ========== HOMEPAGE FILM ========== */
+.film-frame {
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #0a1628;
+  box-shadow: 0 24px 60px rgba(10, 22, 40, 0.24);
+  line-height: 0;
+}
+.film-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #0a1628;
+}
