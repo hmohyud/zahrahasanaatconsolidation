@@ -24,7 +24,6 @@ const INTENTIONAL = new Map([
   ['education.html', 'rebuilt from the 2026 Education strategy document'],
   ['financial.html', 'rebuilt from the 2026 Grants & Livelihoods strategy document'],
   ['centre.html', 'rebuilt from the 2026 Centre Model strategy document'],
-  ['about.html', 'rewritten for neutral NGO presentation (Aug 2026 directive)'],
   ['art-wellness-workshop.html', 'copy edits: email fix, Led by, duplicate title removed'],
   ['contribute.html', 'copy edits: literal asterisks removed'],
   ['get-involved.html', 'neutral venue phrasing per Aug 2026 directive'],

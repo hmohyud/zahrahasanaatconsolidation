@@ -256,6 +256,15 @@ const components = {
       </div>
     );
   },
+  /* Arabic is cursive, so the drop cap on the opening paragraph mangles it —
+     ::first-letter detaches the leading letter and it loses its joined form.
+     Mark those paragraphs so the CSS can opt them out and set them in the
+     display size used for scripture elsewhere on the site. */
+  p: (props: any) => {
+    const text = textOfNode(props?.children).replace(/\s/g, '');
+    const arabic = (text.match(/[؀-ۿ]/g) || []).length;
+    return <p className={arabic > text.length * 0.5 ? 'arabic-line' : undefined}>{props?.children}</p>;
+  },
   img: (props: any) => <img src={asset(props?.url)} alt={props?.alt || ''} loading="lazy" />,
   a: (props: any) =>
     /^https?:\/\//.test(props?.url || '') ? (

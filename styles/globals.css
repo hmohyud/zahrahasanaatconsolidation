@@ -1051,8 +1051,8 @@ nav .subsubmenu a.active { font-weight: 600; }
 /* Drop cap on the opening paragraph — a quiet editorial flourish.
    Targets the lead paragraph whether or not a "← All Stories" back-link
    precedes it; never the back-link or a centred/short intro. */
-.page-content > p:first-child:not(.story-back):not(.has-text-align-center):not(.has-text-align-right)::first-letter,
-.page-content > p.story-back + p:not(.has-text-align-center):not(.has-text-align-right)::first-letter {
+.page-content > p:first-child:not(.story-back):not(.has-text-align-center):not(.has-text-align-right):not(.arabic-line)::first-letter,
+.page-content > p.story-back + p:not(.has-text-align-center):not(.has-text-align-right):not(.arabic-line)::first-letter {
   font-family: var(--font-display);
   float: left;
   font-size: 3.6em;
@@ -1061,6 +1061,16 @@ nav .subsubmenu a.active { font-weight: 600; }
   margin: 0.06em 0.12em 0 0;
   color: var(--color-primary-dark);
 }
+/* Arabic scripture lines, set like the homepage welcome passage. */
+.page-content p.arabic-line {
+  font-size: clamp(1.4rem, 1.1rem + 1.1vw, 2.05rem);
+  line-height: 1.95;
+  color: var(--color-secondary);
+  text-align: center;
+  direction: rtl;
+  margin-bottom: 1.6rem;
+}
+
 .page-content h2 { font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); margin: 2.5rem 0 1rem; }
 .page-content h3 { font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); margin: 2rem 0 0.85rem; }
 .page-content h4 { margin: 1.75rem 0 0.75rem; }
