@@ -53,6 +53,15 @@ const PLACEHOLDERS = [
 ];
 const stripPlaceholders = (t) => PLACEHOLDERS.reduce((acc, re) => acc.replace(re, ' '), t);
 
+/* Links whose target moved to a verified new home. Parity is about the reader
+   still reaching the same thing, so an old URL counts as present when its
+   replacement is. Add an entry only after the new URL has been checked. */
+const MOVED = new Map([
+  // Issuu account closed (Sept 2026); the book now lives on fatemidawat.com
+  ['http://issuu.com/fatemidawat/docs/golden_panorama_final?e=0',
+   'https://www.fatemidawat.com/teachings/books/golden-panorama-a-pictorial-commemoration-of-the-life-and-service-of-syedna-mohammed-burhanuddins-esteemed-mazoon-syedna-khuzaima-qutbuddin'],
+]);
+
 const files = fs.readdirSync('preview').filter((f) => f.endsWith('.html') && !SKIP.has(f));
 
 const norm = (u) =>
@@ -81,7 +90,7 @@ for (const f of files) {
 
   const oldLinks = new Set(oldArt.find('a[href]').toArray().map((a) => norm($old(a).attr('href'))).filter((h) => h && !h.startsWith('javascript')));
   const newLinks = new Set(newMain.find('a[href]').toArray().map((a) => norm($new(a).attr('href'))));
-  const missingLinks = [...oldLinks].filter((l) => l && !newLinks.has(l));
+  const missingLinks = [...oldLinks].filter((l) => l && !newLinks.has(l) && !newLinks.has(MOVED.get(l)));
 
   if (!missingImgs.length && !missingLinks.length) ok++;
   else problems.push({ file: f, missingImgs: missingImgs.slice(0, 5), missingLinks: missingLinks.slice(0, 5) });
