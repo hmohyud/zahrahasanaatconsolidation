@@ -13,6 +13,7 @@ const SKIP = new Set(['index.html', 'stories.html', 'sitemap.html', 'gate.html']
    obsolete WordPress demo content or rebuilt as structured contact pages).
    Parity is not expected for these — every OTHER page must still match. */
 const INTENTIONAL = new Map([
+  ['story-qjsp-the-journey-of-obtaining-knowledge-the-six-prerequisites-defined-by-amirul-mumineen-speech-by-shz-dr-abdeali-bhaisaheb.html', 'dead "go here to read more" pointer removed; the page it named no longer exists anywhere'],
   ['story-ahimsa-interfaith-event.html', 'date corrected to the event year (2018); the original showed the 2023 posting date'],
   ['taqreeb-overview.html', 'merged into the Taqreeb page (interfaith.html); old URL redirects there'],
   ['taqreeb-about.html', 'merged into the Taqreeb page (interfaith.html); old URL redirects there'],
@@ -45,6 +46,38 @@ const INTENTIONAL = new Map([
   ['interfaith.html', 'rebuilt as the single Taqreeb page: About Taqreeb, Taqreeb overview and Taqreeb Stories merged in, dossier copy added (Nov 2026)'],
   ['taqreeb-stories.html', 'retired: its two stories moved to Stories, its ideas to the Taqreeb page; old URL redirects there'],
 ]);
+
+/* Copy-edit pass (3 Nov 2026): typos, grammar and misspelt names corrected.
+   Only these exact original words may be absent from these pages; every
+   other word must still be there. */
+const CORRECTED = new Map(Object.entries({
+  'mazaar-iftitah.html': 'qutbdudin',
+  'mazaar-quran-inscription.html': "qu'ran",
+  'mazaar-welfare.html': 'fund', // "Scholarship Fund (QJSP)" -> "Program"
+  'syedna-qutbuddin.html': 'ahmadebad',
+  'taqreeb-2017-conference.html': 'makes',
+  'story-a-seamstress-in-the-making.html': "she's",
+  'story-community-conversations-livelihood-series.html': 'entreprenuership',
+  'story-covid-19-assistance.html': 'with', // "with 24-48 hours" -> "within"
+  'story-dental-camp-at-welfare-center.html': 'will',
+  'story-eager-to-learn-eager-to-succeed.html': "who's too",
+  'story-endurance-through-earth-shattering-loss.html': 'gujrat hasanat',
+  'story-entrepreneurship-through-capitalizing-on-financial-loans.html': 'gujrat',
+  'story-excellency-in-fashion-design.html': 'excellency',
+  'story-following-her-dreams.html': 'too',
+  'story-giving-back-with-whats-been-learned.html': 'degree',
+  'story-immediate-relief-for-pandemic-crisis.html': 'brother recieving professed express',
+  'story-opening-of-zahra-hasanaat-center.html': 'org', // dead "mazaar-e-qutbi.org" link text
+  'story-qjsp-ahimsa-interfaith-event.html': 'organsed',
+  'story-qjsp-all-qjsp-students-are-required-to-do-40-hours-of-community-service.html': "student's",
+  'story-qjsp-kin-of-syedna-burhanuddin-in-city-to-promote-education-flags-off-scholarshiops.html': 'scholarshiops',
+  'story-qjsp-scholarship-application-2.html': 'after which submitting',
+  'story-support-in-times-of-tragedy.html': 'readily',
+  'story-syedna-qutbuddin-emphasises-community-service.html': "that's",
+  'story-webinar-battling-covid-19-misconceptions.html': 'assistance', // retired COVID-assistance pointer
+  'story-webinar-hypertension-recognizing-and-dealing-with-the-tension-of-high-blood-pressure.html': 'gross',
+  'story-webinar-sugar-a-bitter-truth.html': 'discuss share',
+}).map(([f, words]) => [f, new Set(words.split(' '))]));
 
 /* Editorial placeholders removed from the prose ("link link", "PAYPAL CTA",
    the dummy sponsorship row…). Stripped from the ORIGINAL text too so the
@@ -112,9 +145,10 @@ for (const f of files) {
   const oldWords = normWords(stripPlaceholders(oldText));
   const newWords = new Set(normWords(newText));
   // sliding check: report words missing from the new page
+  const corrected = CORRECTED.get(f);
   const missing = [];
   for (let i = 0; i < oldWords.length; i++) {
-    if (!newWords.has(oldWords[i])) missing.push(oldWords[i]);
+    if (!newWords.has(oldWords[i]) && !corrected?.has(oldWords[i])) missing.push(oldWords[i]);
   }
   if (missing.length === 0) {
     ok++;

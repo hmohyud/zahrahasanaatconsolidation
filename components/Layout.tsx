@@ -13,6 +13,7 @@ export type SiteSettings = {
   footer: {
     brandText: string;
     contactEmail: string;
+    social?: { label: string; href: string }[];
     copyright: string;
     columns: { title: string; links: { label: string; href: string }[] }[];
   };
@@ -69,6 +70,20 @@ function ExtIcon() {
       <path d="M9 7h8v8" />
     </svg>
   );
+}
+
+/** Platform glyph for a footer social link; unknown platforms get the
+ *  open-in-new-tab arrow. */
+function SocialIcon({ href }: { href: string }) {
+  if (/instagram\.com/.test(href))
+    return (
+      <svg className="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+      </svg>
+    );
+  return <ExtIcon />;
 }
 
 function NavList({ items, depth = 0 }: { items: NavItem[]; depth?: number }) {
@@ -157,6 +172,18 @@ export function Footer({ site }: { site: SiteSettings }) {
             <p>
               <a href={`mailto:${f.contactEmail}`}>{f.contactEmail}</a>
             </p>
+            {!!f.social?.length && (
+              <ul className="footer-social">
+                {f.social.filter((s) => s?.href).map((s, i) => (
+                  <li key={i}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer">
+                      <SocialIcon href={s.href} />
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
         <div className="footer-bottom">{f.copyright}</div>

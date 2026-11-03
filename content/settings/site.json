@@ -21,7 +21,7 @@
     },
     {
       "label": "Programs",
-      "href": "education.html",
+      "href": "index.html#programs",
       "children": [
         {
           "label": "Nutrition & Ration",
@@ -143,6 +143,12 @@
   "footer": {
     "brandText": "A charitable organisation working alongside underserved communities in India through nutrition, healthcare, education, livelihoods, wellness and local community centres.",
     "contactEmail": "info@zahrahasanaat.org",
+    "social": [
+      {
+        "label": "Instagram",
+        "href": "https://www.instagram.com/zahra.hasanaat/"
+      }
+    ],
     "copyright": "© 2026 Zahra Hasanaat. All rights reserved.",
     "columns": [
       {
@@ -235,7 +241,7 @@
       },
       {
         "label": "Our Programs",
-        "href": "education.html"
+        "href": "index.html#programs"
       },
       {
         "label": "Stories",

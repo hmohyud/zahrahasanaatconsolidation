@@ -764,6 +764,9 @@ nav .subsubmenu a.active { font-weight: 600; }
   transition: color var(--transition);
 }
 .site-footer a:hover { color: var(--color-accent); }
+.footer-social { margin-top: 0.75rem; }
+.footer-social a { display: inline-flex; align-items: center; gap: 0.5rem; }
+.footer-social svg { width: 1.05rem; height: 1.05rem; flex-shrink: 0; }
 
 .footer-bottom {
   text-align: center;

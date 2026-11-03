@@ -60,10 +60,55 @@ const stripPlaceholders = (t) => PLACEHOLDERS.reduce((acc, re) => acc.replace(re
    still reaching the same thing, so an old URL counts as present when its
    replacement is. Add an entry only after the new URL has been checked. */
 const MOVED = new Map([
+  // dead links repointed to their verified new homes (checked live 3 Nov 2026)
+  ['http://www.fatemidawat.com/news/events/conference-on-taqreeb-organized-by-qjsp.html',
+   'https://www.fatemidawat.com/news/events/conference-on-taqreeb-organized-by-qjsp'],
+  ['http://www.fatemidawat.com/news/events/shz.-dr.-aziz-bs-meets-dr.-abdul-kalam-%E2%80%93-11th-president-of-india.html',
+   'https://www.fatemidawat.com/news/events/shz-dr-aziz-bs-meets-dr-abdul-kalam-11th-president-of-india'],
+  ['http://www.fatemidawat.com/reference-materials/sijill-articles/138-taqreeb-bridging-divides-by-finding-the-common-denominator.html',
+   'https://www.fatemidawat.com/teachings/respect-all-faiths/taqreeb-bridging-divides-by-finding-the-common-denominator'],
+  ['http://www.fatemidawat.com/resources/bayaans/video-excerpts-syedna-fakhruddin-tus-first-press-meet.html',
+   'https://www.fatemidawat.com/videos/interviews-and-press-conference/video-excerpts-syedna-fakhruddin-tus-first-press-meet'],
+  ['http://www.jnu.ac.in/Conference/',
+   'https://www.jnu.ac.in/'],
+  ['https://newshindindia.com/news/5157/',
+   'https://web.archive.org/web/20240424093436/https://newshindindia.com/news/5157/'],
+  ['https://script.google.com/macros/s/AKfycbwwdnSDHzeVe2EfYDUGM879TZJ1s-dHUMeXOgsjEcbMqWqn4rc/exec',
+   'https://docs.google.com/forms/d/e/1FAIpQLSfUVWbJqyJdKGRbkAxl0GkFVkGc9CeVPiXra_EIHms6A_FA2Q/viewform'],
+  ['https://script.google.com/macros/s/AKfycbxJDcjVqHusfR5QZ9MHAqMBclPiT8RC0aKcwUJ-0vMefrtHWQU/exec',
+   'https://docs.google.com/forms/d/e/1FAIpQLSfUVWbJqyJdKGRbkAxl0GkFVkGc9CeVPiXra_EIHms6A_FA2Q/viewform'],
+  ['https://script.google.com/macros/s/AKfycbySu6pI0uof-6UBmu-KudWYn6AjSpBFDKLIQngGnvg-Cl3VCKM/exec',
+   'https://docs.google.com/forms/d/e/1FAIpQLScd9cHqi1cj8PukBoLS0nRxDwCkVJMNHVF1YMiygoPoTNQXqQ/viewform'],
+  ['https://script.google.com/macros/s/AKfycbylgHH5g7wYlXw4vp-2YLADZ8CaUEhK2N222Mcr5QZC8mCpoAY/exec',
+   'https://docs.google.com/forms/d/e/1FAIpQLScd9cHqi1cj8PukBoLS0nRxDwCkVJMNHVF1YMiygoPoTNQXqQ/viewform'],
+  ['https://www.fatemidawat.com/news/announcements-overview/covid-19-vaccination-message',
+   'https://www.fatemidawat.com/news/announcements/covid-19-vaccination-message'],
+  ['https://www.fatemidawat.com/news/events/qutbi-jubilee-scholarship-program-%E2%80%9Csyedna-taher-fakhruddin-tus-excellence-in-teaching-awards%E2%80%9D-%E2%80%93-vidyaniketan-school-january-2019.html',
+   'https://www.fatemidawat.com/news/events/qutbi-jubilee-scholarship-program-syedna-taher-fakhruddin-tus-excellence-in-teaching-awards-vidyaniketan-school-january-2019'],
+  ['https://www.fatemidawat.com/news/media/community/',
+   'https://www.thehindu.com/news/cities/Delhi/india-is-a-wonderful-example-of-harmony-and-coexistence/article22321394.ece'],
+  ['https://www.fatemidawat.com/watch/bayaans/syedna-taher-fakhruddin-tus-address-world-peace-through-non-violence.html',
+   'https://www.fatemidawat.com/videos/interfaith-addresses/syedna-taher-fakhruddin-tus-address-world-peace-through-non-violence'],
   // Issuu account closed (Sept 2026); the book now lives on fatemidawat.com
   ['http://issuu.com/fatemidawat/docs/golden_panorama_final?e=0',
    'https://www.fatemidawat.com/teachings/books/golden-panorama-a-pictorial-commemoration-of-the-life-and-service-of-syedna-mohammed-burhanuddins-esteemed-mazoon-syedna-khuzaima-qutbuddin'],
 ]);
+
+/* Dead links removed outright: the target is gone and no copy exists anywhere
+   (checked 3 Nov 2026). The surrounding words stay; only the link goes. */
+const RETIRED = new Set([
+  'https://www.fatemidawat.com/connect/covid-19-help',
+  'http://www.fatemidawat.com/resources/bayaans/the-journey-of-obtaining-knowledge.html',
+]);
+
+/* Internal links repointed on one page only, where the old target was the
+   wrong page for that sentence (copy-edit pass, 3 Nov 2026). */
+const PAGE_MOVED = new Map(Object.entries({
+  // "please visit mazaar-e-qutbi.org" -> the Welfare Center page it meant
+  'story-opening-of-zahra-hasanaat-center.html': { 'mazaar.html': 'mazaar-welfare.html' },
+  // the QJSP link went to the Education programme page, not QJSP
+  'story-syedna-qutbuddin-emphasises-community-service.html': { 'education.html': 'qjsp-about.html' },
+}));
 
 const files = fs.readdirSync('preview').filter((f) => f.endsWith('.html') && !SKIP.has(f));
 
@@ -93,7 +138,9 @@ for (const f of files) {
 
   const oldLinks = new Set(oldArt.find('a[href]').toArray().map((a) => norm($old(a).attr('href'))).filter((h) => h && !h.startsWith('javascript')));
   const newLinks = new Set(newMain.find('a[href]').toArray().map((a) => norm($new(a).attr('href'))));
-  const missingLinks = [...oldLinks].filter((l) => l && !newLinks.has(l) && !newLinks.has(MOVED.get(l)));
+  const pageMoved = PAGE_MOVED.get(f) || {};
+  const missingLinks = [...oldLinks].filter((l) => l && !newLinks.has(l) && !newLinks.has(MOVED.get(l))
+    && !newLinks.has(pageMoved[l]) && !RETIRED.has(l));
 
   if (!missingImgs.length && !missingLinks.length) ok++;
   else problems.push({ file: f, missingImgs: missingImgs.slice(0, 5), missingLinks: missingLinks.slice(0, 5) });

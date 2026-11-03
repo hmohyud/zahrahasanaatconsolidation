@@ -383,6 +383,14 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'brandText', label: 'Brand paragraph', ui: { component: 'textarea' } },
               { type: 'string', name: 'contactEmail', label: 'Contact email' },
+              {
+                type: 'object', name: 'social', label: 'Social media links', list: true,
+                ui: { itemProps: (item: any) => ({ label: item?.label || 'Link' }) },
+                fields: [
+                  { type: 'string', name: 'label', label: 'Label (e.g. Instagram)' },
+                  { type: 'string', name: 'href', label: 'Profile link', searchable: false },
+                ],
+              },
               { type: 'string', name: 'copyright', label: 'Copyright line' },
               {
                 type: 'object', name: 'columns', label: 'Link columns', list: true,
