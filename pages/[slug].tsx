@@ -49,6 +49,10 @@ export default function ContentPage(props: Props) {
           title={doc.title}
           subtitle={props.kind === 'story' ? doc.date : doc.subtitle}
           heroImage={doc.heroImage}
+          heroFocus={props.kind === 'page' ? doc.heroFocus : null}
+          // programme pages show their banner photo; stories, and old 1024px
+          // WordPress derivatives (name-1024x683.jpg), keep the dark wash
+          vivid={props.kind === 'page' && !/-\d+x\d+\.(jpe?g|png)$/i.test(doc.heroImage || '')}
         />
         <main className="page-main">
           <div className="container container-narrow">

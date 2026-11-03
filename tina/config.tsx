@@ -67,6 +67,12 @@ export default defineConfig({
             ui: { component: 'textarea' },
           },
           { type: 'image', name: 'heroImage', label: 'Hero background photo', searchable: false },
+          {
+            type: 'string',
+            name: 'heroFocus',
+            label: 'Hero photo focal point (e.g. "50% 10%" keeps the top of the photo in view)',
+            searchable: false,
+          },
           bodyField,
           {
             type: 'object',

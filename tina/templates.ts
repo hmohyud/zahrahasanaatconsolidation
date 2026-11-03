@@ -18,6 +18,7 @@ const galleryTemplate: Template = {
       name: 'children',
       label: 'Images (add one image per line)',
     },
+    { type: 'string', name: 'caption', label: 'Caption under the gallery (optional, e.g. event and date)' },
   ],
 };
 
@@ -119,9 +120,40 @@ export const richTextTemplates: Template[] = [
       { type: 'image', name: 'image', label: 'Image' },
       { type: 'string', name: 'alt', label: 'Image alt text' },
       {
+        type: 'string',
+        name: 'layout',
+        label: 'Layout',
+        options: [
+          { value: 'split', label: 'Side by side (default)' },
+          { value: 'wide', label: 'Wide photo, text below' },
+          { value: 'inset', label: 'Small photo, text wraps around it' },
+        ],
+      },
+      {
         type: 'boolean',
         name: 'mediaRight',
         label: 'Image on the right',
+      },
+      {
+        type: 'string',
+        name: 'ratio',
+        label: 'Photo shape (blank = the photo as it is)',
+        options: [
+          { value: '3/2', label: 'Landscape 3:2' },
+          { value: '4/3', label: 'Landscape 4:3' },
+          { value: '16/9', label: 'Wide 16:9' },
+          { value: '21/9', label: 'Panorama 21:9' },
+          { value: '3/1', label: 'Panorama strip 3:1' },
+          { value: '1/1', label: 'Square' },
+          { value: '4/5', label: 'Portrait 4:5' },
+        ],
+      },
+      { type: 'string', name: 'focus', label: 'Focal point when cropped (e.g. "50% 30%" = centre, upper third)' },
+      { type: 'string', name: 'caption', label: 'Caption under the photo (optional)' },
+      {
+        type: 'boolean',
+        name: 'illustration',
+        label: 'Drawing or graphic (no photo frame, sits on the page colour)',
       },
       {
         type: 'rich-text',

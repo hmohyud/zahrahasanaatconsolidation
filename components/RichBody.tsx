@@ -162,27 +162,53 @@ const components = {
   h4: heading('h4'),
   h5: heading('h5'),
   h6: heading('h6'),
-  MediaText: (props: any) => (
-    <div className={`media-row${props?.mediaRight ? ' media-row--right' : ''}`}>
-      {props?.image && (
-        <figure className="media-row-media">
-          <img src={asset(props.image)} alt={props?.alt || ''} loading="lazy" />
-        </figure>
-      )}
-      <div className="media-row-body">
-        <TinaMarkdown content={props?.children} components={components as any} />
+  /* Layouts: split (side by side), wide (photo across the wide measure, text
+     below) and inset (smaller photo the text wraps around). `ratio` crops the
+     photo to a fixed shape, `focus` picks what stays in frame. */
+  MediaText: (props: any) => {
+    const layout = ['wide', 'inset'].includes(props?.layout) ? props.layout : 'split';
+    // crop shape and focal point travel as CSS variables, so phones can drop the
+    // crop (see globals.css) where a panorama or narrow inset would be too small
+    const imgStyle = {
+      ...(props?.ratio ? { '--ratio': props.ratio } : {}),
+      ...(props?.focus ? { '--focus': props.focus } : {}),
+    } as React.CSSProperties;
+    return (
+      <div
+        className={`media-row media-row--${layout}${props?.mediaRight ? ' media-row--right' : ''}${
+          props?.illustration ? ' media-row--art' : ''
+        }`}
+      >
+        {props?.image && (
+          <figure className="media-row-media">
+            <img
+              src={asset(props.image)}
+              alt={props?.alt || ''}
+              loading="lazy"
+              className={props?.ratio ? 'is-cropped' : undefined}
+              style={imgStyle}
+            />
+            {props?.caption && <figcaption>{props.caption}</figcaption>}
+          </figure>
+        )}
+        <div className="media-row-body">
+          <TinaMarkdown content={props?.children} components={components as any} />
+        </div>
       </div>
-    </div>
-  ),
+    );
+  },
   CoverCard: (props: any) => (
     <div className="highlight-card">
       <TinaMarkdown content={props?.children} components={components as any} />
     </div>
   ),
   Gallery: (props: any) => (
-    <div className="img-gallery">
-      <TinaMarkdown content={props?.children} components={components as any} />
-    </div>
+    <>
+      <div className="img-gallery">
+        <TinaMarkdown content={props?.children} components={components as any} />
+      </div>
+      {props?.caption && <p className="gallery-caption">{props.caption}</p>}
+    </>
   ),
   Carousel: (props: any) => {
     const slides = collectImages(props?.children);

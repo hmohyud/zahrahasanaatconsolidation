@@ -141,6 +141,60 @@
     reveals.forEach(function (el) { el.classList.add('visible'); });
   }
 
+  /* ---------- justified galleries ----------
+     Photos in a row share one height and the row fills the width exactly, so
+     mixed portrait/landscape sets line up without cropping. Each row breaks
+     where its height lands closest to the target (so nothing gets tiny on a
+     phone); a short last row is capped and centred (by the CSS). */
+  var galleries = document.querySelectorAll('.page-content .img-gallery');
+  function layoutGallery(g) {
+    var imgs = Array.prototype.slice.call(g.querySelectorAll('img'));
+    var W = g.clientWidth;
+    if (!imgs.length || !imgs.every(function (i) { return i.naturalWidth > 0; })) return;
+    var gap = parseFloat(getComputedStyle(g).columnGap) || 12;
+    var target = W > 900 ? 300 : W >= 600 ? 240 : 180;
+    var ratio = function (i) { return i.naturalWidth / i.naturalHeight; };
+    var heightOf = function (r, n) { return (W - gap * (n - 1)) / r; };
+    var row = [], sum = 0;
+    var flush = function (last) {
+      var h = heightOf(sum, row.length);
+      if (last) h = Math.min(h, target * 1.8);
+      row.forEach(function (i) {
+        i.style.height = h.toFixed(2) + 'px';
+        i.style.width = (ratio(i) * h).toFixed(2) + 'px';
+      });
+      row = []; sum = 0;
+    };
+    imgs.forEach(function (i) {
+      var r = ratio(i);
+      if (row.length) {
+        var without = heightOf(sum, row.length);
+        var withIt = heightOf(sum + r, row.length + 1);
+        // adding this photo would push the row below target: keep whichever is closer
+        if (withIt < target && Math.abs(without - target) <= Math.abs(withIt - target)) flush(false);
+      }
+      row.push(i);
+      sum += r;
+      if (heightOf(sum, row.length) <= target) flush(false);
+    });
+    if (row.length) flush(true);
+    g.classList.add('is-justified');
+  }
+  galleries.forEach(function (g) {
+    g.querySelectorAll('img').forEach(function (i) {
+      i.loading = 'eager';  // the layout needs every photo's shape up front
+      if (!i.complete) i.addEventListener('load', function () { layoutGallery(g); });
+    });
+    layoutGallery(g);
+  });
+  if (galleries.length) {
+    var gt;
+    window.addEventListener('resize', function () {
+      clearTimeout(gt);
+      gt = setTimeout(function () { galleries.forEach(layoutGallery); }, 120);
+    });
+  }
+
   /* ---------- impact counters ---------- */
   var counters = document.querySelectorAll('[data-count]');
   if (counters.length && 'IntersectionObserver' in window) {

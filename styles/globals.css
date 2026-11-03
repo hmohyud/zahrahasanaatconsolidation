@@ -1029,8 +1029,24 @@ nav .subsubmenu a.active { font-weight: 600; }
     linear-gradient(180deg, rgba(10,22,40,0.72) 0%, rgba(10,22,40,0.88) 100%),
     var(--hero-img);
   background-size: cover;
-  background-position: center;
+  background-position: var(--hero-pos, center);
 }
+/* High-resolution programme banners show their photo: a lighter wash that
+   deepens toward the bottom, a taller band, and a soft shadow under the type
+   so it stays legible on any image. */
+.page-hero.page-hero--vivid {
+  min-height: clamp(340px, 52vh, 560px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page-hero.page-hero--vivid .page-hero-bg {
+  background-image:
+    linear-gradient(180deg, rgba(10,22,40,0.30) 0%, rgba(10,22,40,0.46) 55%, rgba(10,22,40,0.72) 100%),
+    var(--hero-img);
+}
+.page-hero--vivid::after { opacity: 0; }
+.page-hero--vivid :is(h1, h5, p) { text-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 2px 18px rgba(0,0,0,0.4); }
 
 .page-hero::after {
   content: '';
@@ -1056,9 +1072,10 @@ nav .subsubmenu a.active { font-weight: 600; }
 
 /* Drop cap on the opening paragraph — a quiet editorial flourish.
    Targets the lead paragraph whether or not a "← All Stories" back-link
-   precedes it; never the back-link or a centred/short intro. */
-.page-content > p:first-child:not(.story-back):not(.has-text-align-center):not(.has-text-align-right):not(.arabic-line)::first-letter,
-.page-content > p.story-back + p:not(.has-text-align-center):not(.has-text-align-right):not(.arabic-line)::first-letter {
+   precedes it; never the back-link, a centred/short intro, or a details block
+   that opens with a bold label ("Date: …"). */
+.page-content > p:first-child:not(.story-back):not(.has-text-align-center):not(.has-text-align-right):not(.arabic-line):not(:has(> strong:first-child))::first-letter,
+.page-content > p.story-back + p:not(.has-text-align-center):not(.has-text-align-right):not(.arabic-line):not(:has(> strong:first-child))::first-letter {
   font-family: var(--font-display);
   float: left;
   font-size: 3.6em;
@@ -1128,31 +1145,28 @@ nav .subsubmenu a.active { font-weight: 600; }
   }
 }
 
-/* Consecutive images become a masonry collage instead of a stacked dump —
-   CSS columns pack mixed portrait/landscape photos into a tidy wall. */
+/* Galleries are justified rows: site.js sizes every photo so the photos in a row
+   share one height and the row exactly fills the width, uncropped (a short last
+   row is centred rather than blown up). Before that runs, an even grid. */
 .page-content .img-gallery {
-  columns: 2;
-  column-gap: 0.75rem;
-  margin: 1.75rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0;
 }
 .page-content .img-gallery img {
   display: block;
-  width: 100%;
+  flex: 1 1 240px;
+  height: 240px;
+  width: auto;
   max-height: none;
-  margin: 0 0 0.75rem;
-  break-inside: avoid;
+  margin: 0;
+  object-fit: cover;
   border-radius: 0;
   border: 1px solid var(--color-border);
 }
-@media (min-width: 768px) {
-  .page-content .img-gallery { columns: 3; }
-  /* small collages keep bigger photos */
-  .page-content .img-gallery:has(img:nth-child(-n+4):last-child),
-  .page-content .img-gallery:has(p:nth-child(-n+4):last-child) { columns: 2; }
-}
-@media (max-width: 480px) {
-  .page-content .img-gallery { columns: 1; }
-}
+.page-content .img-gallery.is-justified img { flex: none; }
 
 .page-content figcaption,
 .page-content .wp-element-caption {
@@ -1161,6 +1175,8 @@ nav .subsubmenu a.active { font-weight: 600; }
   color: var(--color-muted);
   margin-top: 0.7rem;
   font-style: italic;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 
 /* Pull-quote: centred serif, framed by thin gold rules — gallery wall-text feel */
@@ -1865,25 +1881,106 @@ nav .subsubmenu a.active { font-weight: 600; }
    CMS BLOCK COMPONENTS (TinaCMS rich-text templates)
    ======================================================================== */
 
-/* Image + text row — replaces WordPress media-text blocks */
-.media-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem 2.5rem;
-  align-items: center;
-  margin: 2.5rem 0;
+/* Image + text row — replaces WordPress media-text blocks. Three layouts, chosen
+   per placement (the photo's shape and role, the length of the text):
+     split  photo and text side by side; the photo takes the larger share
+     wide   photo across the wide measure, the text below in the reading column
+     inset  a smaller photo inside the reading column, the text wraps around it
+   `ratio` / `focus` (set inline) crop a photo to a shape and pick its subject. */
+.media-row { margin: clamp(2.5rem, 2rem + 2vw, 4rem) 0; }
+/* the .media-row / .page-content prefixes outrank the generic figure rules */
+.media-row .media-row-media { margin: 0; }
+.page-content .media-row-media img { width: 100%; max-height: none; }
+.page-content .media-row-media img.is-cropped {
+  aspect-ratio: var(--ratio);
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
 }
-@media (min-width: 768px) {
-  .media-row { grid-template-columns: 1fr 1fr; }
-  .media-row--right .media-row-media { order: 2; }
-}
-.media-row-media { margin: 0; }
-.media-row-media img {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--color-border);
+/* Phones: a panorama strip or a narrow inset crop would be tiny or towering at
+   full phone width, so wide and inset photos fall back to their own shape. */
+@media (max-width: 639px) {
+  .page-content .media-row--wide .media-row-media img.is-cropped,
+  .page-content .media-row--inset .media-row-media img.is-cropped { aspect-ratio: auto; }
 }
 .media-row-body > *:last-child { margin-bottom: 0; }
+/* a heading that opens a row sits directly on what follows it */
+.media-row-body > :is(h2, h3, h4):first-child + * { margin-top: 0; }
+/* a gallery that continues the row above it attaches to that row */
+.page-content .media-row:has(+ .img-gallery) { margin-bottom: 1.5rem; }
+
+/* drawings and graphics: no print mat, the white ground blends into the page,
+   and they stay small (on phones centred above their text) */
+.page-content .media-row--art .media-row-media img {
+  background: none;
+  padding: 0;
+  border: 0;
+  mix-blend-mode: multiply;
+  filter: brightness(1.05) contrast(1.05);  /* lift off-white scans to white so they blend fully */
+}
+/* the article is its own compositing group (scroll reveal), so give the blend a
+   page-coloured backdrop inside it */
+.media-row--art .media-row-media { max-width: 240px; margin-inline: auto; background: var(--color-background); }
+@media (min-width: 640px) {
+  .media-row--inset.media-row--art .media-row-media { width: min(32%, 260px); max-width: none; }
+}
+
+/* split — phones read heading -> photo -> text: the body's children join the
+   grid so a leading heading can sit above the photo */
+.media-row--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 clamp(2rem, 1rem + 2.5vw, 3.5rem);
+  align-items: center;
+}
+.media-row--split .media-row-body,
+.media-row--inset .media-row-body { display: contents; }
+.media-row--split .media-row-body > :is(h2, h3, h4):first-child,
+.media-row--inset .media-row-body > :is(h2, h3, h4):first-child { order: -1; margin-top: 0; }
+.media-row--split .media-row-media,
+.media-row--inset .media-row-media { margin-bottom: 1.25rem; }
+@media (min-width: 900px) {
+  .media-row--split { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .media-row--split.media-row--right { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .media-row--split.media-row--right .media-row-media { order: 2; }
+  .media-row--split .media-row-body { display: block; }
+  .media-row--split .media-row-body > :first-child { margin-top: 0; }
+  .media-row--split .media-row-media { margin-bottom: 0; }
+}
+
+/* wide — a lead photo for the text that follows it */
+.media-row--wide .media-row-media { margin-bottom: 1.75rem; }
+.media-row--wide .media-row-body > :first-child { margin-top: 0; }
+
+/* inset — phones stack it like split; from 640px the photo floats */
+.media-row--inset { display: flex; flex-direction: column; }
+@media (min-width: 640px) {
+  .media-row--inset { display: flow-root; }
+  .media-row--inset .media-row-body { display: block; }
+  .media-row--inset .media-row-body > :first-child { margin-top: 0; }
+  .media-row--inset .media-row-media { float: left; width: min(42%, 340px); margin: 0.4rem 2.25rem 1rem 0; }
+  .media-row--inset.media-row--right .media-row-media { float: right; margin: 0.4rem 0 1rem 2.25rem; }
+}
+
+/* wide screens: split rows, wide photos and galleries step out past the prose
+   column (up to 190px a side); text set beside or below them keeps its measure */
+@media (min-width: 900px) {
+  .page-content .media-row--split,
+  .page-content .media-row--wide .media-row-media,
+  .page-content .img-gallery,
+  .page-content .gallery-caption { margin-inline: calc(-1 * clamp(0px, (100vw - 860px) / 2, 190px)); }
+}
+.page-content .gallery-caption {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--color-muted);
+  text-align: center;
+  line-height: 1.35;
+  text-wrap: balance;
+  margin-top: 0;
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+.page-content .img-gallery:has(+ .gallery-caption) { margin-bottom: 0.8rem; }
 
 /* Highlight card — replaces WordPress cover blocks */
 .highlight-card {
@@ -2051,7 +2148,9 @@ nav a:hover .ext-icon { opacity: 1; }
   margin-top: 0.15rem;
 }
 .contact-address { white-space: pre-line; }
-.contact-note {
+/* .page-content prefix: the generic paragraph margin would otherwise leave the
+   card bottom-heavy */
+.page-content .contact-note {
   margin: 1.25rem 0 0;
   font-size: 0.95rem;
   color: var(--color-muted);

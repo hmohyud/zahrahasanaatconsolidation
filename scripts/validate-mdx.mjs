@@ -6,7 +6,7 @@ import matter from 'gray-matter';
 import { parseMDX } from '@tinacms/mdx';
 
 const leafTemplates = [
-    { name: 'Gallery', fields: [ { type: 'rich-text', name: 'children' } ] },
+    { name: 'Gallery', fields: [ { type: 'rich-text', name: 'children' }, { type: 'string', name: 'caption' } ] },
     { name: 'Embed', fields: [
       { type: 'string', name: 'url' }, { type: 'string', name: 'title' },
       { type: 'number', name: 'aspect' } ] },
@@ -28,7 +28,9 @@ const bodyField = {
   templates: [
     { name: 'MediaText', fields: [
       { type: 'image', name: 'image' }, { type: 'string', name: 'alt' },
-      { type: 'boolean', name: 'mediaRight' },
+      { type: 'string', name: 'layout' }, { type: 'boolean', name: 'mediaRight' },
+      { type: 'string', name: 'ratio' }, { type: 'string', name: 'focus' },
+      { type: 'string', name: 'caption' }, { type: 'boolean', name: 'illustration' },
       { type: 'rich-text', name: 'children', templates: leafTemplates } ] },
     { name: 'CoverCard', fields: [
       { type: 'rich-text', name: 'children', templates: leafTemplates } ] },

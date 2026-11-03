@@ -84,6 +84,7 @@ export const PAGE_QUERY = `
       eyebrow
       subtitle
       heroImage
+      heroFocus
       body
       related { title links { label href } }
     }
