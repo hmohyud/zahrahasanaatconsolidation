@@ -132,7 +132,10 @@
           ro.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    // threshold 0 = reveal on first sight. A fractional threshold can never be
+    // reached by an element taller than the viewport divided by it (at 0.08,
+    // ~10,000px — a long article on a phone), which then stays invisible.
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(function (el) { ro.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add('visible'); });

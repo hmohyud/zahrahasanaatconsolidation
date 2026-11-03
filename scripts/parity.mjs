@@ -13,6 +13,9 @@ const SKIP = new Set(['index.html', 'stories.html', 'sitemap.html', 'gate.html']
    obsolete WordPress demo content or rebuilt as structured contact pages).
    Parity is not expected for these — every OTHER page must still match. */
 const INTENTIONAL = new Map([
+  ['story-ahimsa-interfaith-event.html', 'date corrected to the event year (2018); the original showed the 2023 posting date'],
+  ['taqreeb-overview.html', 'merged into the Taqreeb page (interfaith.html); old URL redirects there'],
+  ['taqreeb-about.html', 'merged into the Taqreeb page (interfaith.html); old URL redirects there'],
   ['taqreeb-contact.html', 'deleted: one generic sentence, no contact details'],
   ['taqreeb-faq.html', 'deleted: WordPress demo FAQ (return policy / shipping)'],
   ['taqreeb-portfolio.html', 'deleted: WordPress demo portfolio ("Project Name")'],
@@ -39,8 +42,8 @@ const INTENTIONAL = new Map([
   ['taqreeb-2016-conference.html', 'stale promise removed'],
   ['qjsp-contact.html', 'rebuilt as a structured contact card'],
   ['connect.html', 'rebuilt: contact card + consolidated buttons'],
-  ['interfaith.html', 'related links to the three deleted Taqreeb pages removed'],
-  ['taqreeb-stories.html', '"Tell us your story" repointed to connect'],
+  ['interfaith.html', 'rebuilt as the single Taqreeb page: About Taqreeb, Taqreeb overview and Taqreeb Stories merged in, dossier copy added (Nov 2026)'],
+  ['taqreeb-stories.html', 'retired: its two stories moved to Stories, its ideas to the Taqreeb page; old URL redirects there'],
 ]);
 
 /* Editorial placeholders removed from the prose ("link link", "PAYPAL CTA",
