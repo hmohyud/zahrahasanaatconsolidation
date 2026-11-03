@@ -2058,6 +2058,9 @@ nav a:hover .ext-icon { opacity: 1; }
 }
 @media (min-width: 620px) {
   .contact-row { grid-template-columns: 8rem 1fr; align-items: baseline; }
+  /* beside a photo the card is only half the column wide: stack label over value
+     so an email address doesn't break mid-word */
+  .media-row .contact-row { grid-template-columns: 1fr; }
 }
 
 /* ========================================================================
